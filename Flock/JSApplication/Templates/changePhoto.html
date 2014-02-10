@@ -1,0 +1,74 @@
+﻿<div id="changePictureModel" ng-controller="uploadImageController" class="modal fade" 
+     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 900px;">
+        <div class="modal-content" style="width: 900px;">
+            <div class="modal-header" style="width: 900px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="text-center">
+                        <h4 id="myPictureModalLabel" style="text-decoration:underline; font-family:tahoma">Change Cover Photo</h4>    
+                    </div>
+                    <div class="bs-callout bs-callout-danger" ng-show="showErrorMessage">
+                        <h4>Check image size</h4>
+                        <p>Image size should be minimum 880*320px with aspect ratio less than 2.67</p>
+                    </div>
+                </div>
+                <script>
+                    function wrapperfunction() {
+                        $('.wrapper').imagedrag({
+                            input: "#output",
+                            position: "middle",
+                            attribute: "value"
+                        });
+                    }
+                </script>
+            </div>
+
+            <div class="modal-body" style="width: 900px; padding: 10px;">
+                
+                <div style="height: 400px !important;">
+                <div>
+               
+                    <div>
+                        <div class="control-group">
+                            <div>
+                                <label class="control-label text-info">&nbsp;Upload Picture - Minimum size of 800 X 200 px</label>
+                            </div>
+                            <div class="wrapper">
+                                <img id="uplodedPic" onmousedown="wrapperfunction()" style="width:880px; height: 330px;" ng-src="{{coverPicImageSource}}" />
+                            </div>
+                            <input type="file" name="file" id="imgProfilePic" onchange="reader.readAsDataURL(this.files[0])" />
+                            <input id="output" style="display: none;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+                <!--<div style="margin-left:auto; margin-right: auto; width: 180px; padding-top: 10px;">
+                    
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                        <img data-src="holder.js/100%x100%" alt="...">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                        <div>
+                            <span class="btn btn-default btn-file">
+                                <span class="fileinput-new">Select image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" name="..." id="imgProfilePic">
+                            </span>
+                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                        </div>
+                    </div>
+                       
+               </div>-->
+            
+
+            <div class="modal-footer" style="width: 900px;">
+                <button id="close" class="btn pull-right" style="margin-left:3px;" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    <button id="Button1" class="btn pull-right " style="margin-left:3px;" ng-click="reset()"  aria-hidden="true">Reset</button>
+                    <button id="preview" class="btn btn-primary pull-right" style="margin-left:3px;" ng-show="showPreview" ng-click="imagePreview()">Preview</button>
+                    <button id="save" class="btn btn-primary pull-right " style="margin-left:3px;" data-dismiss="modal"  ng-show="showSave" ng-click="saveImage()">Save</button><br/>  <br/>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,51 @@
+﻿
+    <div id="changeProfilePictureModel" ng-controller="uploadProfileImageController" class="modal fade in" tabindex="-1" 
+        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 700px;">
+            <div class="modal-content" style="width: 700px;">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="text-center">
+                        <h4 id="myPictureModalLabel" style="text-decoration:underline; font-family:tahoma">Change Profile Photo</h4>    
+                    </div>
+                    <div class="bs-callout bs-callout-danger" ng-show="showPictureModalErrorMessage">
+                        <h4>Check image size</h4>
+                        <p>Image size should lie between 64*64px and 400*400px)</p>
+                    </div>
+                </div>
+                
+                <div class="modal-body">
+                    <div style="margin-left: auto; margin-right: auto;">
+                        <div>
+                            <div class="control-group">
+                                <div>
+                                    <a class="text-info" style="font-size: 18px; text-decoration: none;">Upload Picture - Size Min(64 X 64 px) Max(400 X 400 px)</a>
+                                </div>
+                                
+                                <div style="margin-left:auto; margin-right: auto; width: 200px; padding-top: 10px;">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <img id="Img1" ng-src="{{profilePicImageSource}}" style="height:160px; width:160px; border-color:black ; border-width:2px;  "  />
+                                    <div>
+                                        <span class="btn btn-default btn-file">
+                                        <span class="fileinput-new">Select image</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="..." id="imgUploadProfilePic">
+                                        </span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button id="closePictureModal" class="btn pull-right" style="margin-left:3px;" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    <button id="savePictureModal" class="btn btn-primary pull-right"  style="margin-left:3px;" data-dismiss="modal" ng-show="showPictureSave" ng-click="saveProfileImage()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+

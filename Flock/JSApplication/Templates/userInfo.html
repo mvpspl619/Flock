@@ -1,0 +1,75 @@
+﻿<div id="userInfoModal" ng-controller="userInfoController" class="modal fade in" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <div class="text-center">
+                        <h4 class="font-20 line-30" style="text-decoration:underline">Change user details</h4>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                
+                <form role="form">
+                    <!--FirstName-->
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input name="userFirstName" type="text" placeholder="First Name" maxlength="25"  ng-disabled="true" ng-model="userPreferences.FirstName" class="form-control" id="firstName">
+                    </div> 
+                    
+                    <!--LastName-->
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input name="userLastName" type="text" placeholder="First Name" maxlength="25"  ng-disabled="true" ng-model="userPreferences.LastName" class="form-control" id="lastName">
+                    </div> 
+
+                    <!--Email-->
+                    <div class="form-group">
+                        <label for="emailAddress">Email address:</label>
+                        <input name="userEmailId" type="text" placeholder="Email Address" maxlength="25"  ng-disabled="true" ng-model="userPreferences.EmailId" class="form-control" id="emailAddress">
+                    </div>
+                    
+                    <!--Project-->
+                    <div class="form-group">
+                        <label for="projectDetails">Project:</label>
+                        <select id="projectDetails" class="form-control" name="userProject" ng-model="userProject">
+                            <option value="ADP Credit">ADP Credit</option>
+                            <option value="ALM">ALM</option>
+                            <option value="Autobots">Autobots</option>
+                            <option value="BOL">BOL</option>
+                            <option value="CDS">CDS</option>
+                            <option value="CIS">CIS</option>
+                            <option value="CRM">CRM</option>
+                            <option value="Customer Touch">Customer Touch</option>
+                            <option value="Deal Data">Deal Data</option>
+                            <option value="Desking">Desking</option>
+                            <option value="DIS">DIS</option>
+                            <option value="eRater">eRater</option>
+                            <option value="Inventory">Inventory</option>
+                            <option value="Lead Manager">Lead Manager</option>
+                            <option value="Menu">Menu</option>
+                            <option value="PID">PID</option>
+                            <option value="Platform">Platform</option>
+                            <option value="Quoting">Quoting</option>
+                        </select>
+                    </div>
+                    
+                    <!--Interests-->
+                    <div class="form-group">
+                        <label for="interests">Interests:</label>
+                        <textarea class="form-control" rows="3" name="userInterests" type="text" placeholder="Your Interests" ng-model="userInterest" id="interests"></textarea>
+                    </div>
+                </form>
+
+            </div>
+    
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" data-dismiss="modal" ng-click="savePreferences()">Save</a>
+                <button class="btn pull-right" style="margin-left:3px;" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            </div>
+    
+        </div>
+        </div>
+    </div>

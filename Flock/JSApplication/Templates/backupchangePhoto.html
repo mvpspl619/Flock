@@ -1,0 +1,108 @@
+﻿<div id="changePictureModel" ng-controller="uploadImageController" class="modal fade" 
+     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" style="width: 800px;">
+    <div class="modal-content" style="width: 800px;">
+        <!DOCTYPE html>
+        <div class="modal-header">
+            
+        </div>
+        <div class="modal-body">
+            
+        </div>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../Content/imgareaselect-animated.css" rel="stylesheet" />
+    <link href="../../Content/imgareaselect-default.css" rel="stylesheet" />
+    <link href="../../Content/imgareaselect-deprecated.css" rel="stylesheet" />
+
+    <script src="../../Scripts/jquery.min.js"></script>
+    <script src="../../Scripts/jquery.imgareaselect.min.js"></script>
+    <link href="../../Content/FlockApplication.css" rel="stylesheet" />
+    
+    <script type="text/javascript ">
+
+        $(document).ready(function () {
+            $('#uplodedPic').imgAreaSelect({
+                handles: true,
+                resizable: true,
+                maxHeight: 200,
+                maxWidth: 782,
+                minHeight: 200,
+                minWidth: 782
+            });
+
+            $('#close').click(function () {
+                $('#uplodedPic').imgAreaSelect({
+                    hide: true
+                });
+            });
+
+            $('#preview').click(function () {
+                $('#uplodedPic').imgAreaSelect({
+                    hide: true
+                });
+            });
+
+            $('#save').click(function () {
+                $('#uplodedPic').imgAreaSelect({
+                    hide: true
+                });
+            });
+
+            $('#hiddenFields').hide();
+            $('#uplodedPic').imgAreaSelect({
+                onSelectEnd: function (img, selection) {
+                    $('#X').val(selection.x1);
+                    $('#Y').val(selection.y1);
+                    $('#width').val(selection.width);
+                    $('#height').val(selection.height);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="Div1" ng-controller="uploadImageController"class="modal fade" style="margin-left: -33%; margin-top: -7px; height: 800px !important; width: 810px;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <h4 id="myModalLabel" style="text-decoration:underline; font-family:tahoma">Change Cover Photo</h4>
+            <button id="close" class="btn pull-right" style="margin-left:3px;" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            <button id="Button1" class="btn pull-right " style="margin-left:3px;" ng-click="reset()"  aria-hidden="true">Reset</button>
+            <button id="preview" class="btn btn-primary pull-right " style="margin-left:3px;" ng-show="showPreview" ng-click="imagePreview()">Preview</button>
+            <button id="save" class="btn btn-primary pull-right " style="margin-left:3px;" data-dismiss="modal"  ng-show="showSave" ng-click="saveImage()">Save</button><br/>  <br/>
+            <div style="height:40px; ">
+            <label class="control-label alert-block alert-error"  ng-show="showErrorMessage">&nbsp;Upload Failed - Picture size should be minimum of 800 X 200 px</label>
+                </div>
+            
+            <br/>
+        </div>
+       
+        <div class="modal-body">
+            
+        
+            <div style="height: 600px !important;">
+                <div style="margin-left: 14px; margin-right: 14px;">
+               
+                    <div>
+                        <div class="control-group">
+                            <div>
+                                <label class="control-label text-info">&nbsp;Upload Picture - Minimum size of 800 X 200 px</label>
+                            </div>
+                            <img id="uplodedPic" ng-src="{{coverPicImageSource}}" />
+                            <div>
+                                <input type="file" name="file" id="imgProfilePic" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        
+    </div>
+</body>
+</html>
+
+
+    </div>
+</div>
+</div>

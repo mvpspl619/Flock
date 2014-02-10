@@ -1,0 +1,372 @@
+﻿.messageContent {
+    float: left;
+    width: 400px;
+    max-width: 400px;
+    word-wrap: break-word;
+    font-family: calibri;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: lightcyan;
+}
+
+.messageComment {
+    float: left;
+    width: 320px;
+    max-width: 320px;
+    word-wrap: break-word;
+    font-family: verdana;
+    font-size: 10px;
+}
+
+
+.greyColor {
+    background-color: lightcyan;
+}
+
+.info_wrapper {
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+    }
+
+.flocker {
+    height: 46px;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    margin: 0;
+}
+
+.flocker .info {
+        width: 170px;
+        float: left;
+        margin-left: 10px;
+    }
+
+.sidebar_title {
+    margin: 0;
+    background: #eee no-repeat 0 0;
+    padding: 10px 10px;
+    color: #444;
+    text-shadow: 1px 1px 0 #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.aboutImgSize {
+    width: 90px; 
+    height: 90px
+}
+
+.img200200 {
+    width: 200px; 
+    height: 200px
+}
+
+.text-middle {
+    vertical-align: middle !important;
+}
+
+.font-20 {
+    font-size: 20px !important;
+}
+
+.line-30 {
+    line-height: 30px !important;
+}
+
+.header-bg {
+    color: #21759b; 
+    background: #DDDDDD
+}
+
+.rowbottompadding {
+    padding-bottom: 10px;
+}
+
+.modal-footer {
+  padding: 5px 5px 5px;
+  margin-bottom: 0;
+  text-align: right;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+.float-right {
+    float: right;   
+}
+.float-left {
+    float: left;
+}
+.img800200 {
+    width: 800px; 
+    height: 200px
+}
+.img {
+     width:880px;
+     margin: 0 auto;
+}
+.divcentre
+{
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+    margin-top: 200px;
+}
+.div800200 {
+    width: 800px;
+    height: 200px;
+}
+.padder {
+    padding: 5px;
+    border: 5px;
+    margin: 10px;
+    margin-left: 5px;
+}
+.bgColor{
+
+}
+
+#changeCoverButton {
+    display: none;
+}
+
+#changeCoverButton:hover {
+    display: block;
+}
+
+#coverPhoto:hover + #changeCoverButton {
+    display: block;
+}
+
+#userCoverPic:hover + #changeCoverButton {
+    display: block;
+}
+
+#changeProfile {
+    display: none;
+}
+
+#changeProfile:hover {
+    display: block;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+#profilebox:hover + #changeProfile {
+    display: block;
+}
+
+.userprofileimageholder {
+    float: left; 
+    margin: 0px; 
+    padding: 0px;
+}
+
+.userprofiledetailsholder {
+    float: left; 
+    margin-left: 5px; 
+    margin-top: 2px;
+}
+
+.userprofilename {
+    color: #484848; 
+    font: bold 13px/16px Arial, sans-serif ;
+}
+
+.userprofiletime {
+    color: #707070; 
+    font: normal 11px Arial, sans-serif; 
+    margin-top: -3px;
+}
+
+.littleprofileimage {
+    width: 42px; 
+    height: 48px;
+    padding: 0px;
+    border-color: rgb(190, 186, 186); 
+    border-width: 1px; 
+}
+
+.userprofileholder {
+    width: 100%;
+    height: 65px;
+    padding: 9px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.leftcontainer {
+    width: 550px;
+    height: auto;
+    margin: 0;
+    padding-right: 10px;
+    border-right: 2px solid rgba(144, 144, 144, 0.13);
+}
+
+.rightcontainer {
+    width: 320px;
+    height: 95%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.quackholder {
+    background-color: #f5f5f5;
+}
+
+.imagequackholder {
+    left: 0;
+    right: 0;
+}
+
+.imagequack {
+    position: relative;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.mainQuack {
+    width: 100%;
+    resize: none !important; 
+    font-family: arial;  
+    font-size:14px;
+}
+
+.quackmessageholder {
+    background-color: white;
+    height: auto;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.quackmessage {
+    font: normal 14px Arial, sans-serif;
+    padding: 10px;
+    margin: 0;
+}
+
+.likescommentsholder {
+    width: 100%;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid #ef4135;
+    background-color: white;
+}
+
+.likescommentstext {
+    font: bold 13px/16px Arial, sans-serif;
+    text-decoration: none;
+    color: #707070;
+}
+
+.likescommentsholder a:hover {
+    text-decoration: none;
+    color: #707070;
+}
+
+.commentprofileholder {
+    width: 100%;
+    min-height: 60px;
+    padding: 5px;
+}
+
+.commentuserphoto {
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.commentuserdetails {
+    width: 470px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.commentusername {
+    margin-top: -5px;
+}
+
+.commentusercomment {
+    font-family: arial; 
+    font-size: 12px;
+}
+
+.replybox {
+    width: 538px;
+    height: 60px;
+    padding: 10px;
+    margin: 0;
+    position: relative;
+}
+
+
+.scrolling {
+    position: fixed;
+    top: 0;
+    margin-left: 560px;
+    margin-top: 18px;
+    height: 95%;
+}
+
+.wrapper {
+    width: 880px;
+height: 330px;
+overflow: hidden;
+margin: auto;
+cursor: -webkit-grab;
+}
+
+.profileoverlay {
+background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.13) 39%, rgba(0,0,0,0.34) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(39%,rgba(255,255,255,0.13)), color-stop(100%,rgba(0,0,0,0.34))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0.13) 39%,rgba(0,0,0,0.34) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0.13) 39%,rgba(0,0,0,0.34) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0.13) 39%,rgba(0,0,0,0.34) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.13) 39%,rgba(0,0,0,0.34) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#57000000',GradientType=0 ); /* IE6-9 */
+}
+
+.flockcolor {
+    color: #ef4135;
+}
+
+.flocklogo {
+    margin-top: 9px;
+margin-left: 15px;
+}
+
+a.white:hover {
+    color: #ef4135;
+}
+
+span.white:hover {
+    color: #ef4135;
+}
+
+textarea {resize:none !important}
+
+textarea:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.boxsizingBorder {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    
+}
+

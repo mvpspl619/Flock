@@ -1,0 +1,92 @@
+﻿<div style="background: url('../../Content/images/background.png') no-repeat fixed; background-color: #e5e5e5; height: 100%;">
+    <!--Header Section-->
+    
+    
+    <div class="container">
+            <!--Cover Pic Section-->
+            <div ng-controller="userProfileController">
+                    
+                    <div>
+                        <!--Nav Bar-->
+                        <div style="background-color: black; width: 880px; height: 60px;">
+                            <div style="background-color: #ef4135; width: 150px; height: 60px; display: block; float: left">
+                                <h1 class="flocklogo"><span class="glyphicon glyphicon-send" style="color: white;"></span><a class="text-center" href="/#" style="font-family: 'Oswald', sans-serif; margin: 5px; text-decoration: none; color: white;">Flock</a></h1>
+                            </div><!--/.container-fluid -->
+                            <div style="width: 150px; height: 60px; display: block; float: right">
+                                <div class="flockcolor text-center" style="display: block; float: left; width: 60px; height: 60px;">
+                                    <h4 style="margin-top: 30%;"><a data-target="#userInfoModal" href="" ng-click="showUserDetails()" data-toggle="modal"><span class="glyphicon glyphicon-user white"></span></a></h4>
+                                </div>
+                                <div class="flockcolor text-center" style="display: block; float: right; width: 60px; height: 60px; margin-right: 20px;">
+                                    <h4 style="margin-top: 20px;"><a style="text-decoration: none;" class="white" data-target="#aboutModal" href="" data-toggle="modal">About</a></h4>  
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="position: relative; background-color: rgba(0, 182, 255, 0.61) ; height: 330px; margin-top:10px;">
+                            <!--COVER-->
+                            <div class="coverbox round-corner" style="height: 330px;">
+                                <img id="userCoverPic" ng-src="{{userProfile.CoverImage}}" class="img-responsive" style="height: 330px; z-index: -10;" />
+                            </div>
+
+                            <!-- Profile photo-->
+                            <div class="profileoverlay" style="position: relative; top: 0; left: 0; height: 330px; margin-top: -330px;">
+                                <div style="height: 190px; position: absolute; top: 120px;">
+                                <div style="float: left; margin-left: 20px; width: 160px;">
+                                    <img class="img-thumbnail img-rounded media-object" style="margin-left:auto; margin-right: auto; height: 190px; width: 160px; border-color: dimgray; border-width: 2px;" ng-src="{{userProfile.ProfileImage}}" />                                
+                                </div>
+                                <div style="float: left; margin-left:15px; margin-top:95px;">
+                                    <h3 class="text-center" style="margin: 5px; margin-left: 2px; color: white;"><strong>{{userProfile.FirstName}} {{userProfile.LastName}}</strong></h3>    
+                                    <h5 class="pull-left" style="margin: 2px; color: white"><a style="color: white;" href="mailto:{{userProfile.EmailId}}">{{userProfile.EmailId}}</a></h5><br/>
+                                    <h5 class="pull-left" style="margin: 2px; color: white">Project: {{userProfile.Project}}</h5><br/>
+                                    <h5 class="pull-left" style="clear: left; margin: 2px; color: white">Interests: {{userProfile.Interests}}</h5><br/>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+
+                        <!-- User Details-->  
+                        <!--<strong>{{errorMessage}}</strong>
+                            <div class="span4 pull-center"><strong>{{userProfile.FirstName}} {{userProfile.LastName}}</strong></div>
+                            <div class="span4 pull-center">{{userProfile.EmailId}}</div>
+                            <div class="span4 pull-center"><hr /></div>
+                            <div class="span4 pull-center">{{userProfile.Project}}</div>
+                            <div class="span4 pull-center">{{userProfile.Interests}}</div>-->
+
+                    </div>  
+                         
+                    <div class="span8 pull-center">&nbsp;</div>
+                    <div class="span8 pull-center">&nbsp;</div>
+                    <div class="span8 pull-center">&nbsp;</div>                    
+                    
+                    <!-- QUACKS-->
+                    <div class="span8 pull-center">   
+                        <div ng-repeat="quack in quacks">
+                            <div class="media well span7" style="margin-top: -35px; padding: 10px; background: white; border: none;">
+                                                                
+                                <div class="media-body">                                    
+                                    <span style="color: slategray; font-family: candara; ">
+                                        <strong> {{quack.TimeSpan}} </strong>
+                                    </span>
+
+                                    <!-- <a ng-show="quack.IsNew" style="color: green; font-size: 11px; text-decoration:none" ng-click="setQuackId(quack.Id, quack.Likes)" href="#quackUserLikes" data-toggle="modal" data-backdrop="false" class="pull-right">({{quack.Likes}}) Likes | ({{quack.Replies}}) Replies</a>-->
+
+                                    <p style="font-family: arial;  font-size:12px;">
+                                        <span highlight-tags callback-fn="onLinkClick" ng-model="quack.Message"></span>                                                                                
+                                    </p>                                        
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>              
+
+            </div>            
+</div>
+
+<ng-include src="'../JSApplication/Templates/quackUserLikes.html'"></ng-include>
+<ng-include src="'../JSApplication/Templates/About.html'"></ng-include>
+
+   

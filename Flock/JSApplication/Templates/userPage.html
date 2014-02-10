@@ -1,0 +1,120 @@
+﻿<div ng-controller="userPageController" style="background: url('../../Content/images/background.png') no-repeat fixed; background-color: #e5e5e5; height: 100%;">
+    
+    <script>
+        $(window).scroll(function () {
+            $('#announcements').toggleClass('scrolling', $(window).scrollTop() > $('#stopscrolling').offset().top);
+        });
+    </script>
+    <div class="container center">
+        <!--NAVBAR-->
+        <div style="background-color: black; width: 880px; height: 60px;">
+            <div style="background-color: #ef4135; width: 150px; height: 60px; display: block; float: left">
+                <h1 class="flocklogo"><span class="glyphicon glyphicon-send" style="color: white;"></span><a class="text-center" href="#" style="font-family: 'Oswald', sans-serif; margin: 5px; text-decoration: none; color: white;">Flock</a></h1>
+            </div><!--/.container-fluid -->
+            <div style="width: 150px; height: 60px; display: block; float: right">
+                <div class="flockcolor text-center" style="display: block; float: left; width: 60px; height: 60px;">
+                    <h4 style="margin-top: 30%;"><a data-target="#userInfoModal" href="" ng-click="showUserDetails()" data-toggle="modal"><span class="glyphicon glyphicon-user white"></span></a></h4>
+                </div>
+                <div class="flockcolor text-center" style="display: block; float: right; width: 60px; height: 60px; margin-right: 20px;">
+                    <h4 style="margin-top: 20px;"><a style="text-decoration: none;" class="white" data-target="#aboutModal" href="" data-toggle="modal">About</a></h4>  
+                </div>
+            </div>
+        </div>
+        
+        <div style="position: relative; background-color: rgba(0, 182, 255, 0.61) ; height: 330px; margin-top: 10px;">
+                            <!--COVER-->
+                            <div class="coverbox round-corner" style="background-color: lightblue; height: 330px;">
+                                <img id="userCoverPic" class="img-responsive" style="height: 330px; z-index: -10;" />
+                                <a id="changeCoverButton" style="position: absolute; bottom: 5px; right: 5px;" data-target="#changePictureModel" data-toggle="modal" class="btn btn-sm btn-danger">change cover</a>
+                            </div>
+
+                            <!-- Profile photo-->
+            <div class="profileoverlay" style="position: relative; margin-top: -330px;">
+                            <div style="height: 160px; position: absolute; top: 150px;">
+                                <div style="float: left; margin-left: 20px; width: 140px;">
+                                    <a id="profilebox" href="" ng-click="openProfilePageByGivenName(displayName)">
+                                    <img id="userProfilePic" class="media-object img-rounded img-thumbnail" ng-src="{{userProfilePicUrl}}" style="margin-left:auto; margin-right: auto; height: 160px; width: 140px; border-color: dimgray; border-width: 2px;" />
+                                    </a>
+                                    <a id="changeProfile" style="position: absolute; top: 80%; left: 12.5%;"  class="btn btn-xs btn-danger" data-target="#changeProfilePictureModel" data-toggle="modal">change</a>
+                                    
+                                </div>
+                                <div style="float: left; margin-left:15px; margin-top:135px;">
+                                    <h3 class="text-center" style="margin: 0;"><a style="text-decoration: none; color: white;" href="" ng-click="openProfilePageByGivenName(displayName)"><strong>{{displayName}}</strong></a></h3>
+                                </div>
+                                </div>
+                            </div>                      
+                             
+                        </div>
+        <!-- NEW QUACK -->
+        <!--QUACKS-->
+    
+    </div>
+    <div class="container center" id="stopscrolling" style="margin-top: 10px;">
+        
+        <!--QuackContents-->
+        <div class="leftcontainer pull-left">
+            
+            <!--New Quack-->
+            <div class="insidecontainer" style="height: 120px; margin-bottom: 15px;">
+                <div id="postnewquack" style="width:100%; height: 120px; float: right; position: relative;">
+                    <div class="textareacontainer" style="height: 70px; margin: 0; display:block; background-color: white;">
+                        <textarea id="Textarea1" class="mainQuack" placeholder="Your Quack..." ng-model="messageContent" style="border: 0; padding: 10px;overflow: hidden; height: 70px; width: 100%; color: rgb(128, 128, 128); "
+                                  ng-disabled=" disableQuackMessage" on-enter="saveQuack()"></textarea>
+                    </div>
+                
+                    <div id="buttons" style="background-color:rgb(200, 199, 199); height: 50px; width: 100%; position: absolute; top: 70px;">
+                        <a class="btn btn-success pull-right" style="margin-right: 10px; margin-top: 7px;" ng-click="saveQuack()">Post Quack</a>
+                        <a class="btn btn-primary pull-left" data-toggle="modal" data-target="#postImageQuack"  style="margin-left: 10px; margin-top: 7px;">Add photo</a>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="well span8" style="background: none; height: auto; margin: 0px; padding: 0px; border: 0;">
+                <!--OBJECT - QUACK-->
+                <div ng-repeat="quack in quacks" style="margin-bottom: 15px;">
+
+                    <!--Begin, Quack user pic--------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <quack />
+                    <quack />
+                    <quack /><quack />
+                    <quack />
+                    <quack />
+
+                </div>
+                <!--Delete in Production-->
+            </div>
+        </div>
+        <!--Advertisements-->
+        <div class="rightcontainer pull-right" id="announcements">
+            <ul class="list-group">
+                <li class="list-group-item">Latest announcements</li>
+                <li class="list-group-item">Events</li>
+                <li class="list-group-item">Project updates</li>
+                <li class="list-group-item">New hire welcomes</li>
+                <li class="list-group-item">Birthdays and announcements</li>
+                </ul>
+        </div>
+    </div>
+    
+    <!--<div id="rightcontainer" style="width: 18%; position: fixed; right: 0; top: 10%; margin: 0px; z-index: 1000; display: block; float: right;">
+       <img src="../../Content/images/happenings.png"/>
+       <img src="../../Content/images/potluck.png"/>
+       <img src="../../Content/images/teamouting.png" style="margin-left: -20px;"/>
+    </div>-->
+
+    <ng-include src="'JSApplication/Templates/changePhoto.html'"></ng-include>
+    <ng-include src="'JSApplication/Templates/changeProfilePic.html'"></ng-include>
+    <ng-include src="'JSApplication/Templates/quackUserLikes.html'"></ng-include>
+    <ng-include src="'JSApplication/Templates/SearchWindow.html'"></ng-include>
+    <ng-include src="'JSApplication/Templates/About.html'"></ng-include>
+    <ng-include src="'JSApplication/Templates/userInfo.html'"></ng-include>
+    <ng-include src="'JSApplication/Templates/postImageQuack.html'"></ng-include>
+    
+
+</div>
+
+
+
+
+

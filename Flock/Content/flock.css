@@ -1,0 +1,8 @@
+﻿
+ .round-corner {
+      -webkit-border-radius: 3px 3px 3px 3px; 
+      -moz-border-radius: 3px 3px 3px 3px;
+      -o-border-radius: 3px 3px 3px 3px;
+      border-radius: 3px 3px 3px 3px;
+   }
+

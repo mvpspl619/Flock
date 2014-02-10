@@ -1,0 +1,29 @@
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewBag.Title</title>   
+        @Styles.Render("~/Content/jasnybootstrap.css")
+        @Styles.Render("~/Content/bootstrap")
+        @Styles.Render("~/Content/css")
+    
+    </head>
+<body ng-app="flockApp" style="height: 100%;">
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jasnybootstrap")
+    @Scripts.Render("~/bundles/underScorejs")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/JSApplication")
+    @Scripts.Render("~/bundles/angularroutejs")
+    @Scripts.Render("~/bundles/imagedragjs")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
