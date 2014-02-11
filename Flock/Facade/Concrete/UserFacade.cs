@@ -77,8 +77,6 @@ namespace Flock.Facade.Concrete
 
         private User ReadUserDetailsFromActiveDirectory(string userName)
         {
-
-
             var currentUser = new User();
             var directory = new DirectoryEntry();
             var userAccountName = userName.Replace("DS\\", "");

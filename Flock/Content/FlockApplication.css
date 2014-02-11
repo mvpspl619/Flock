@@ -212,9 +212,11 @@
 
 .rightcontainer {
     width: 320px;
-    height: 95%;
-    margin: 0;
-    padding: 0;
+    height: 96%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 20px;
     background-color: white;
     border-radius: 4px;
 }
@@ -305,7 +307,6 @@
 }
 
 .replybox {
-    width: 538px;
     height: 60px;
     padding: 10px;
     margin: 0;

@@ -8,8 +8,8 @@ namespace Flock
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/imagedragjs").Include(
-                "~/Scripts/imagedragjquery.js",
-                "~/Scripts/imagedragcustom.js"
+                "~/Scripts/flockapplication.js",
+                "~/Scripts/imagedragjquery.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -60,7 +60,8 @@ namespace Flock
                 "~/JSApplication/Directives/onEnter.js",
                  "~/JSApplication/Directives/setTitle.js",
                  "~/JSApplication/Directives/highlightTags.js",
-                 "~/JSApplication/Directives/quack.js"
+                 "~/JSApplication/Directives/quack.js",
+                 "~/JSApplication/Directives/simpleQuack.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquerymigrate").Include(

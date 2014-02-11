@@ -37,29 +37,25 @@
                             <div class="wrapper">
                                 <img id="uplodedPic" onmousedown="wrapperfunction()" style="width:880px; height: 330px;" ng-src="{{coverPicImageSource}}" />
                             </div>
-                            <input type="file" name="file" id="imgProfilePic" onchange="reader.readAsDataURL(this.files[0])" />
-                            <input id="output" style="display: none;"/>
+                            
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileinput-new">Select file</span>
+                                    <span class="fileinput-exists">Change</span>
+                                    <input type="file" name="file" id="imgProfilePic" onchange="reader.readAsDataURL(this.files[0])" />
+                                    <input id="output" style="display: none;"/>
+                                </span>
+                            <span class="fileinput-filename"></span>
+                            <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             </div>
                 <!--<div style="margin-left:auto; margin-right: auto; width: 180px; padding-top: 10px;">
+                  <input type="file" name="file" id="File1" onchange="reader.readAsDataURL(this.files[0])" />  
                     
-                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                        <img data-src="holder.js/100%x100%" alt="...">
-                        </div>
-                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                        <div>
-                            <span class="btn btn-default btn-file">
-                                <span class="fileinput-new">Select image</span>
-                                <span class="fileinput-exists">Change</span>
-                                <input type="file" name="..." id="imgProfilePic">
-                            </span>
-                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                        </div>
-                    </div>
                        
                </div>-->
             

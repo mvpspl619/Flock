@@ -49,9 +49,9 @@ namespace Flock.Facade.Concrete
         public void SaveQuack(Quack quack)
         {
             //Remove this in production
-            int id = quack.QuackContent.ID;
-            quack.QuackContent.ID = id + 1;
-            quack.ID = id + 1;
+            //int id = quack.QuackContent.ID;
+            //quack.QuackContent.ID = id + 1;
+            //quack.ID = id + 1;
             quack.CreatedDate = DateTime.Now;
             quack.LastModifiedDate = DateTime.Now;
             quack.Active = true;
@@ -70,8 +70,8 @@ namespace Flock.Facade.Concrete
 
                 //Reduce image here and feed it down below
                 Image imgPhoto = Image.FromStream(new MemoryStream(data));
-                int ar = imgPhoto.Width / imgPhoto.Height;
-                imgPhoto = ResizeImage(imgPhoto, 538, (538 / ar));
+                double ar = (Convert.ToDouble(imgPhoto.Width)) / (Convert.ToDouble(imgPhoto.Height));
+                imgPhoto = ResizeImage(imgPhoto, 538, (Convert.ToInt32(538 / ar)));
                 data = ImageToByteArray(imgPhoto);
                 quack.QuackContent.Image = data;
             }

@@ -1,0 +1,15 @@
+﻿<div class="media well span7" style="padding: 10px; background: white; border: none;">
+                                                                
+                                <div class="media-body">                                    
+                                    <span style="color: slategray; font-family: candara; ">
+                                        <strong> {{quack.TimeSpan}} </strong>
+                                    </span>
+
+                                    <!-- <a ng-show="quack.IsNew" style="color: green; font-size: 11px; text-decoration:none" ng-click="setQuackId(quack.Id, quack.Likes)" href="#quackUserLikes" data-toggle="modal" data-backdrop="false" class="pull-right">({{quack.Likes}}) Likes | ({{quack.Replies}}) Replies</a>-->
+
+                                    <p style="font-family: arial;  font-size:12px;">
+                                        <span highlight-tags callback-fn="onLinkClick" ng-model="quack.Message"></span>                                                                                
+                                    </p>                                        
+                                </div>
+
+                            </div>

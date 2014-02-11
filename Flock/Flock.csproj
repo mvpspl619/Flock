@@ -307,6 +307,7 @@
     <Content Include="JSApplication\Controllers\userPageController.js" />
     <Content Include="JSApplication\Controllers\userProfileController.js" />
     <Content Include="JSApplication\Directives\autoUpdateUserTags.js" />
+    <Content Include="JSApplication\Directives\simpleQuack.js" />
     <Content Include="JSApplication\Directives\highlightTags.js" />
     <Content Include="JSApplication\Directives\onEnter.js" />
     <Content Include="JSApplication\Directives\quack.js" />
@@ -321,6 +322,7 @@
     <Content Include="JSApplication\Templates\changePhoto.html" />
     <Content Include="JSApplication\Templates\changeProfilePic.html" />
     <Content Include="JSApplication\Templates\quack.html" />
+    <Content Include="JSApplication\Templates\simpleQuack.html" />
     <Content Include="JSApplication\Templates\userPage.html" />
     <Content Include="JSApplication\Templates\Guest.html" />
     <Content Include="JSApplication\Templates\postImageQuack.html" />
@@ -339,8 +341,8 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\flockapplication.js" />
     <Content Include="Scripts\html5shiv.js" />
-    <Content Include="Scripts\imagedragcustom.js" />
     <Content Include="Scripts\imagedragjquery.js" />
     <Content Include="Scripts\jasnybootstrap.js" />
     <Content Include="Scripts\jquery-migrate.js" />

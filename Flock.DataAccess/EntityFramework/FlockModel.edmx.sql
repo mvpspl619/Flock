@@ -107,7 +107,7 @@ GO
 
 -- Creating table 'Quacks'
 CREATE TABLE [dbo].[Quacks] (
-    [ID] int  NOT NULL,
+    [ID] int IDENTITY(1,1)  NOT NULL,
     [UserID] int  NOT NULL,
     [ContentID] int  NOT NULL,
     [QuackTypeID] int  NOT NULL,
@@ -121,7 +121,7 @@ GO
 
 -- Creating table 'QuackContents'
 CREATE TABLE [dbo].[QuackContents] (
-    [ID] int  NOT NULL,
+    [ID] int IDENTITY(1,1)  NOT NULL,
     [MessageText] nvarchar(300)  NOT NULL,
     [CreatedDate] datetime  NOT NULL,
     [Image] varbinary(max)  NULL,

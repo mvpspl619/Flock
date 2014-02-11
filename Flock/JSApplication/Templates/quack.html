@@ -1,4 +1,4 @@
-﻿<div class="media well span7" style="background: white; border: none !important; padding: 0px; margin: 0px;">
+﻿<div class="media well span7" style="background: white; border: none !important; padding: 0px; margin-bottom: 25px;">
                     
                         <div class="userprofileholder">
                             <div class="userprofileimageholder">
@@ -86,24 +86,16 @@
 
                                 <div id="latestReply" ng-show="!quack.ShowConversation && quack.showLatestReply" style="display: block; background: ghostwhite;">
                                     <hr style="margin: 0.1em auto;" />
-                                    <div class="media">
+                                    <div class="media" style="margin-top: 5px;">
 
                                         <a class="pull-left" href="" ng-click="openProfilePageByGivenName(quack.LatestReply.UserDisplayName)">
-                                            <img class="media-object" style="width: 48px; height: 48px; margin-left: 5px; box-shadow: 3px 3px 1px #888888;" ng-src="{{ quack.LatestReply.UserImage}}" />
+                                            <img style="margin-left: 5px; margin-bottom: 5px;" class="media-object img-thumbnail littleprofileimage" ng-src="{{ quack.LatestReply.UserImage}}" />
                                         </a>
                                         <div class="media-body">
-                                            <span class="media-heading"
-                                                  style="color: steelblue; font-family: candara; font-weight: bold; font-size: 13px;">{{quack.LatestReply.UserDisplayName}}
-                                            </span>
-                                            <span
-                                                style="color: slategray; font-family: candara; font-weight: bold; font-size: 10px;">&nbsp;-{{quack.LatestReply.TimeSpan}}
-                                            </span>
-
-                                            <button type="button" class="close pull-right" ng-click="deleteQuack(quack.LatestReply.Id)"
-                                                    style="margin-left: 2px; margin-right: 5px; font-weight: bold; font-size: 14px !important;" ng-show="quack.LatestReply.ShowDelete" aria-hidden="true">
-                                                x</button>
-
-                                            <p style="font-family: arial; font-size: 12px; width: 500px">
+                                            
+                                            <a class="media-heading userprofilename ng-binding" style="font-size: 12px;" href="" ng-click="openProfilePageByGivenName(quack.LatestReply.UserDisplayName)">{{quack.LatestReply.UserDisplayName}}</a>
+                                            <span class="userprofiletime">&middot;{{quack.LatestReply.TimeSpan}}</span>
+                                            <p style="font-family: arial; font-size: 11px; width: 500px">
                                                 <span highlight-tags callback-fn="onLinkClick" ng-model="quack.LatestReply.Message"></span>
 
                                             </p>
@@ -142,7 +134,7 @@
                                                         x</button>
                                                 </div>
                                             
-                                                <div class="commentusercomment">
+                                                <div class="commentusercomment" style="font-size:11px;">
                                                     <p>
                                                         <span highlight-tags callback-fn="onLinkClick" ng-model="reply.Message"></span>
                                                     </p>
@@ -159,8 +151,8 @@
 
                                 <!--REPLY BOX-- ng-show="quack.ShowConversation"-->
                                 <div class="replybox" ng-show="quack.ShowConversation">
-                                    <textarea id="{{'replyBox'+ quack.Id}}" class="pull-left" style="width: 445px; height: 40px; resize: none; border: 1px solid lightgrey; font-family: arial; font-size: 12px;" placeholder="Reply..." rows="2" maxlength="300" ng-disabled="disableReplyAction" on-enter="saveReply(quack.Id, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)"> @{{quack.UserDisplayName}}:&nbsp;</textarea>
-                                    <a class="btn btn-primary btn-xs pull-right" style="position: absolute; right: 10px; bottom: 20px;" ng-click="saveReply(quack.Id, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)">comment</a>
+                                    <textarea id="{{'replyBox'+ quack.Id}}" class="pull-left" style="width: 90%; height: 40px; resize: none; border: 1px solid lightgrey; font-family: arial; font-size: 12px;" placeholder="Reply..." rows="2" maxlength="300" ng-disabled="disableReplyAction" on-enter="saveReply(quack.Id, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)"> @{{quack.UserDisplayName}}:&nbsp;</textarea>
+                                    <a class="btn btn-primary btn-sm pull-right" style="margin-top: 4px;" ng-click="saveReply(quack.Id, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)">comment</a>
                                 </div>
 
                             </div>

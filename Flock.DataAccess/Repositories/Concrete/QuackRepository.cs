@@ -52,7 +52,7 @@ namespace Flock.DataAccess.Repositories.Concrete
         {
             var quack = base.GetById(quackId);
             quack.Active = false;
-            base.Update(quack);
+            base.Delete(quack);
         }
 
         public void UpdateQuack(int quackId)
