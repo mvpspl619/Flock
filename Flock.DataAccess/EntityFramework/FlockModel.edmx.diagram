@@ -21,10 +21,12 @@
         <AssociationConnector Association="FlockModel.FK_Quack_User" ManuallyRouted="false" />
         <AssociationConnector Association="FlockModel.FK_UserInterest_User" ManuallyRouted="false" />
         <AssociationConnector Association="FlockModel.FK_UserProject_User" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="FlockModel.QuackLike" Width="1.5" PointX="6.875" PointY="10.25" />
+        <EntityTypeShape EntityType="FlockModel.QuackLike" Width="1.5" PointX="5.875" PointY="9.875" />
         <AssociationConnector Association="FlockModel.FK_QuackLikes_Quacks" />
         <AssociationConnector Association="FlockModel.FK_QuackLikes_Users" />
-        <EntityTypeShape EntityType="FlockModel.sysdiagram" Width="1.5" PointX="10.942207401125788" PointY="11.088959982194453" />
+        <EntityTypeShape EntityType="FlockModel.sysdiagram" Width="1.5" PointX="9.875" PointY="9.625" />
+        <EntityTypeShape EntityType="FlockModel.HashTag" Width="1.5" PointX="8.875" PointY="3.75" />
+        <AssociationConnector Association="FlockModel.HashTagQuack" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

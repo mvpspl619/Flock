@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 02/04/2014 12:08:04
--- Generated from EDMX file: C:\Users\mandapav\Desktop\Flock\Flock\Flock.DataAccess\EntityFramework\FlockModel.edmx
+-- Date Created: 02/19/2014 12:58:11
+-- Generated from EDMX file: C:\Users\mandapav\Desktop\FlockV2\Flock.DataAccess\EntityFramework\FlockModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,6 +17,12 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_UserInterest_Interest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserInterests] DROP CONSTRAINT [FK_UserInterest_Interest];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProject_Project]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserProjects] DROP CONSTRAINT [FK_UserProject_Project];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Quack_Quack]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Quacks] DROP CONSTRAINT [FK_Quack_Quack];
 GO
@@ -29,23 +35,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Quack_User]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Quacks] DROP CONSTRAINT [FK_Quack_User];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UserInterest_User]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserInterests] DROP CONSTRAINT [FK_UserInterest_User];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProject_User]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UserProjects] DROP CONSTRAINT [FK_UserProject_User];
+GO
 IF OBJECT_ID(N'[dbo].[FK_QuackLikes_Quacks]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[QuackLikes] DROP CONSTRAINT [FK_QuackLikes_Quacks];
 GO
 IF OBJECT_ID(N'[dbo].[FK_QuackLikes_Users]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[QuackLikes] DROP CONSTRAINT [FK_QuackLikes_Users];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserInterest_Interest]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UserInterests] DROP CONSTRAINT [FK_UserInterest_Interest];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserInterest_User]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UserInterests] DROP CONSTRAINT [FK_UserInterest_User];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserProject_Project]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UserProjects] DROP CONSTRAINT [FK_UserProject_Project];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserProject_User]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UserProjects] DROP CONSTRAINT [FK_UserProject_User];
 GO
 
 -- --------------------------------------------------
@@ -58,20 +58,17 @@ GO
 IF OBJECT_ID(N'[dbo].[Projects]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Projects];
 GO
-IF OBJECT_ID(N'[dbo].[QuackContents]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[QuackContents];
-GO
-IF OBJECT_ID(N'[dbo].[QuackLikes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[QuackLikes];
-GO
 IF OBJECT_ID(N'[dbo].[Quacks]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Quacks];
+GO
+IF OBJECT_ID(N'[dbo].[QuackContents]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[QuackContents];
 GO
 IF OBJECT_ID(N'[dbo].[QuackTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[QuackTypes];
 GO
-IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[sysdiagrams];
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
 GO
 IF OBJECT_ID(N'[dbo].[UserInterests]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserInterests];
@@ -79,8 +76,11 @@ GO
 IF OBJECT_ID(N'[dbo].[UserProjects]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserProjects];
 GO
-IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Users];
+IF OBJECT_ID(N'[dbo].[QuackLikes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[QuackLikes];
+GO
+IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[sysdiagrams];
 GO
 
 -- --------------------------------------------------
@@ -107,7 +107,7 @@ GO
 
 -- Creating table 'Quacks'
 CREATE TABLE [dbo].[Quacks] (
-    [ID] int IDENTITY(1,1)  NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
     [UserID] int  NOT NULL,
     [ContentID] int  NOT NULL,
     [QuackTypeID] int  NOT NULL,
@@ -121,7 +121,7 @@ GO
 
 -- Creating table 'QuackContents'
 CREATE TABLE [dbo].[QuackContents] (
-    [ID] int IDENTITY(1,1)  NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
     [MessageText] nvarchar(300)  NOT NULL,
     [CreatedDate] datetime  NOT NULL,
     [Image] varbinary(max)  NULL,
@@ -188,6 +188,20 @@ CREATE TABLE [dbo].[sysdiagrams] (
 );
 GO
 
+-- Creating table 'HashTags'
+CREATE TABLE [dbo].[HashTags] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'HashTagQuack'
+CREATE TABLE [dbo].[HashTagQuack] (
+    [HashTags_Id] int  NOT NULL,
+    [Quacks_ID] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -250,6 +264,18 @@ GO
 ALTER TABLE [dbo].[sysdiagrams]
 ADD CONSTRAINT [PK_sysdiagrams]
     PRIMARY KEY CLUSTERED ([diagram_id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'HashTags'
+ALTER TABLE [dbo].[HashTags]
+ADD CONSTRAINT [PK_HashTags]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [HashTags_Id], [Quacks_ID] in table 'HashTagQuack'
+ALTER TABLE [dbo].[HashTagQuack]
+ADD CONSTRAINT [PK_HashTagQuack]
+    PRIMARY KEY NONCLUSTERED ([HashTags_Id], [Quacks_ID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -384,6 +410,29 @@ ADD CONSTRAINT [FK_QuackLikes_Users]
 CREATE INDEX [IX_FK_QuackLikes_Users]
 ON [dbo].[QuackLikes]
     ([UserId]);
+GO
+
+-- Creating foreign key on [HashTags_Id] in table 'HashTagQuack'
+ALTER TABLE [dbo].[HashTagQuack]
+ADD CONSTRAINT [FK_HashTagQuack_HashTag]
+    FOREIGN KEY ([HashTags_Id])
+    REFERENCES [dbo].[HashTags]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Quacks_ID] in table 'HashTagQuack'
+ALTER TABLE [dbo].[HashTagQuack]
+ADD CONSTRAINT [FK_HashTagQuack_Quack]
+    FOREIGN KEY ([Quacks_ID])
+    REFERENCES [dbo].[Quacks]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_HashTagQuack_Quack'
+CREATE INDEX [IX_FK_HashTagQuack_Quack]
+ON [dbo].[HashTagQuack]
+    ([Quacks_ID]);
 GO
 
 -- --------------------------------------------------

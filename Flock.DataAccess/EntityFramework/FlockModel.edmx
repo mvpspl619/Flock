@@ -6,6 +6,8 @@
     <edmx:StorageModels>
     <Schema Namespace="FlockModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="FlockModelStoreContainer">
+          <EntitySet Name="HashTagQuack" EntityType="FlockModel.Store.HashTagQuack" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HashTags" EntityType="FlockModel.Store.HashTags" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Interests" EntityType="FlockModel.Store.Interests" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Projects" EntityType="FlockModel.Store.Projects" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="QuackContents" EntityType="FlockModel.Store.QuackContents" store:Type="Tables" Schema="dbo" />
@@ -16,6 +18,14 @@
           <EntitySet Name="UserInterests" EntityType="FlockModel.Store.UserInterests" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProjects" EntityType="FlockModel.Store.UserProjects" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="FlockModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_HashTagQuack_HashTag" Association="FlockModel.Store.FK_HashTagQuack_HashTag">
+            <End Role="HashTags" EntitySet="HashTags" />
+            <End Role="HashTagQuack" EntitySet="HashTagQuack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HashTagQuack_Quack" Association="FlockModel.Store.FK_HashTagQuack_Quack">
+            <End Role="Quacks" EntitySet="Quacks" />
+            <End Role="HashTagQuack" EntitySet="HashTagQuack" />
+          </AssociationSet>
           <AssociationSet Name="FK_Quack_Quack" Association="FlockModel.Store.FK_Quack_Quack">
             <End Role="Quacks" EntitySet="Quacks" />
             <End Role="Quacks1" EntitySet="Quacks" />
@@ -57,6 +67,21 @@
             <End Role="UserProjects" EntitySet="UserProjects" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="HashTagQuack">
+          <Key>
+            <PropertyRef Name="HashTags_Id" />
+            <PropertyRef Name="Quacks_ID" />
+          </Key>
+          <Property Name="HashTags_Id" Type="int" Nullable="false" />
+          <Property Name="Quacks_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HashTags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Interests">
           <Key>
             <PropertyRef Name="Id" />
@@ -160,6 +185,30 @@
           <Property Name="Project" Type="nvarchar" MaxLength="50" />
           <Property Name="Interests" Type="nchar" MaxLength="200" />
         </EntityType>
+        <Association Name="FK_HashTagQuack_HashTag">
+          <End Role="HashTags" Type="FlockModel.Store.HashTags" Multiplicity="1" />
+          <End Role="HashTagQuack" Type="FlockModel.Store.HashTagQuack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HashTags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HashTagQuack">
+              <PropertyRef Name="HashTags_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HashTagQuack_Quack">
+          <End Role="Quacks" Type="FlockModel.Store.Quacks" Multiplicity="1" />
+          <End Role="HashTagQuack" Type="FlockModel.Store.HashTagQuack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quacks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HashTagQuack">
+              <PropertyRef Name="Quacks_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Quack_Quack">
           <End Role="Quacks" Type="FlockModel.Store.Quacks" Multiplicity="0..1" />
           <End Role="Quacks1" Type="FlockModel.Store.Quacks" Multiplicity="*" />
@@ -365,6 +414,11 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="HashTags" EntityType="FlockModel.HashTag" />
+          <AssociationSet Name="HashTagQuack" Association="FlockModel.HashTagQuack">
+            <End Role="HashTag" EntitySet="HashTags" />
+            <End Role="Quack" EntitySet="Quacks" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Interest">
           <Key>
@@ -405,6 +459,7 @@
           <Property Type="Boolean" Name="Active" Nullable="false" />
           <Property Type="DateTime" Name="LastModifiedDate" Precision="3" />
           <NavigationProperty Name="QuackLikes" Relationship="FlockModel.FK_QuackLikes_Quacks" FromRole="Quack" ToRole="QuackLike" />
+          <NavigationProperty Name="HashTags" Relationship="FlockModel.HashTagQuack" FromRole="Quack" ToRole="HashTag" />
         </EntityType>
         <EntityType Name="QuackContent">
           <Key>
@@ -620,6 +675,18 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="HashTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Quacks" Relationship="FlockModel.HashTagQuack" FromRole="HashTag" ToRole="Quack" />
+        </EntityType>
+        <Association Name="HashTagQuack">
+          <End Type="FlockModel.HashTag" Role="HashTag" Multiplicity="*" />
+          <End Type="FlockModel.Quack" Role="Quack" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -737,6 +804,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="HashTags">
+      <EntityTypeMapping TypeName="IsTypeOf(FlockModel.HashTag)">
+        <MappingFragment StoreEntitySet="HashTags">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="HashTagQuack" TypeName="FlockModel.HashTagQuack" StoreEntitySet="HashTagQuack">
+      <EndProperty Name="HashTag">
+        <ScalarProperty Name="Id" ColumnName="HashTags_Id" />
+      </EndProperty>
+      <EndProperty Name="Quack">
+        <ScalarProperty Name="ID" ColumnName="Quacks_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

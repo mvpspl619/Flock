@@ -253,8 +253,8 @@
 }
 
 .quackmessage {
-    font: normal 14px Arial, sans-serif;
-    padding: 10px;
+    font: normal 16px Arial, sans-serif;
+    padding: 15px;
     margin: 0;
 }
 
@@ -292,9 +292,9 @@
 }
 
 .commentuserdetails {
-    width: 470px;
+    width: 820px;
     margin: 0px;
-    padding: 0px;
+    padding-top: 4px;
 }
 
 .commentusername {
@@ -347,6 +347,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .flocklogo {
     margin-top: 9px;
 margin-left: 15px;
+    margin-right: 15px;
 }
 
 a.white:hover {

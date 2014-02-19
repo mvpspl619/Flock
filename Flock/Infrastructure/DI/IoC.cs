@@ -43,6 +43,7 @@ namespace Flock.Infrastructure.DI {
                             x.For<IAutoMap>().Use<AutoMap>();
                             x.For<IImageFacade>().Use<ImageFacade>();
                             x.For<IQuackLikeRepository>().Use<QuackLikeRepository>();
+                            x.For<IHashTagRepository>().Use<HashTagRepository>();
                         });
             return ObjectFactory.Container;
         }

@@ -24,6 +24,12 @@ namespace Flock.DataAccess.Repositories.Concrete
             base.Add(quack);
         }
 
+        public double GetQuackID(Quack quack)
+        {
+            //var quack = _context.Quacks
+            //    .Where(q=>q.)
+            return 0;
+        }
 
         public void GetQuack(int id)
         {
@@ -102,9 +108,6 @@ namespace Flock.DataAccess.Repositories.Concrete
                          orderby quack.CreatedDate descending
                          select quack
                          ;
-
-                             
-
         }
     }
 }

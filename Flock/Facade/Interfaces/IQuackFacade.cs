@@ -13,7 +13,7 @@ namespace Flock.Facade.Interfaces
         void SaveQuack(Quack quack);
         void GetQuack(int id);
         IList<QuackDto> GetAllQuacks();
-
+        IList<QuackDto> GetAllQuacksWithHashtag(string hashTag);
         IList<QuackDto> GetQuacksByLastNameAndFirstName(string lastName, string firstName);
 
         void DeleteQuack(int id);

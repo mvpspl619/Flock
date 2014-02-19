@@ -137,7 +137,18 @@ flockApp.controller('userPageController', function ($scope, $window, userService
                 
                 for (var i = 0; i < data.length; i++) {
                     
-
+                    //look for hashtag and provide a href on click
+                    var postText = data[i].Message;
+                    var regexp = new RegExp('#([^\\s]*)', 'g');
+                    var hashtag = postText.match(regexp);
+                    if (hashtag !==  null) {
+                        for (var k = 0; k < hashtag.length; k++) {
+                            var hashtagLink = "<a href='" + hashtag[k] + "'>" + hashtag[k] + "</a>";
+                            postText = postText.replace(hashtag[k], hashtagLink);
+                        }
+                        data[i].Message = postText;
+                    }
+                    
                     if (!(data[i].QuackImage) || data[i].QuackImage == "") {
                         data[i].showQuackImage =false;
                     }

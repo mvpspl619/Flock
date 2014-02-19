@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
+using System.Text.RegularExpressions;
 using System.Web;
 using Flock.DTO;
 using Flock.DataAccess.Base;
@@ -19,16 +21,18 @@ namespace Flock.Facade.Concrete
         private readonly IQuackTypeRepository _quackTypeRepository;
         private readonly IUserRepository _userRepository;
         private readonly IQuackLikeRepository _quackLikeRepository;
+        private readonly IHashTagRepository _hashTagRepository;
         private readonly IUserFacade _userFacade;
         private readonly IImageFacade _imageFacade;
 
-        public QuackFacade(IQuackRepository quackRepository, IQuackTypeRepository quackTypeRepository, IUserRepository userRepository, IQuackLikeRepository quackLikeRepository,
+        public QuackFacade(IQuackRepository quackRepository, IQuackTypeRepository quackTypeRepository, IUserRepository userRepository, IQuackLikeRepository quackLikeRepository, IHashTagRepository hashTagRepository,
             IUserFacade userFacade, IImageFacade imageFacade)
         {
             _quackRepository = quackRepository;
             _quackTypeRepository = quackTypeRepository;
             _userRepository = userRepository;
             _quackLikeRepository = quackLikeRepository;
+            _hashTagRepository = hashTagRepository;
             _userFacade = userFacade;
             _imageFacade = imageFacade;
         }
@@ -77,8 +81,20 @@ namespace Flock.Facade.Concrete
             }
 
             quack.QuackContent.CreatedDate = DateTime.Now;
-            _quackRepository.SaveQuack(quack);
 
+            //look for hashtags
+            var regex = new Regex(@"(?<=#)\w+");
+            var matches = regex.Matches(quack.QuackContent.MessageText);
+
+            foreach (Match m in matches)
+            {
+                HashTag hashtag = new HashTag();
+                hashtag.Name = m.ToString();
+                hashtag.Quacks.Add(quack);
+                quack.HashTags.Add(hashtag);
+                _hashTagRepository.SaveHashTag(hashtag);
+            }
+            _quackRepository.SaveQuack(quack);
             if (quack.ConversationID != 0)
             {
                 _quackRepository.UpdateQuack(quack.ConversationID);
@@ -137,6 +153,28 @@ namespace Flock.Facade.Concrete
             return quackResults;
         }
 
+        public IList<QuackDto> GetAllQuacksWithHashtag(string hashTag)
+        {
+            var userName = HttpContext.Current.User.Identity.Name;
+            var user = _userFacade.GetUserDetails(userName);
+
+            var quacks = _quackRepository.GetAllQuacks();
+            var quackResults = new List<QuackDto>();
+
+            foreach (var quack in quacks)
+            {
+                var q = new QuackDto();
+                q = QuackMapper(quack, user.ID);
+                var replies = _quackRepository.GetAllReplies(quack.ID);
+                var qReplies = (from reply in replies let qreply = new QuackDto() select QuackMapper(reply)).ToList();
+                q.QuackReplies = qReplies;
+                q.Replies = replies.Count(qq => qq.Active);
+                quackResults.Add(q);
+
+            }
+
+            return quackResults;
+        }
 
         private QuackDto QuackMapper(Quack quack, int userId = 0)
         {

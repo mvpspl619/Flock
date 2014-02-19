@@ -1,4 +1,5 @@
-﻿using System.DirectoryServices;
+﻿using System.Collections;
+using System.DirectoryServices;
 using System.Web;
 using System.Web.Security;
 using System.Web.Services.Description;
@@ -48,6 +49,13 @@ namespace Flock.Controllers
         {
            return _quackFacade.GetAllQuacks();
         }
+
+        [GET("hashtags")]
+        public IList<QuackDto> GetAllQuacksWithHashtag(string hashTag)
+        {
+            return _quackFacade.GetAllQuacksWithHashtag(hashTag);
+        }
+
 
         [POST("likeOrUnlikeQuack")]
         public HttpResponseMessage Post(int quackId, int userId, bool isLike)
