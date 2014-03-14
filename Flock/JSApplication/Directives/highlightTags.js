@@ -16,8 +16,8 @@ flockApp.directive('highlightTags', function ($compile, $rootScope) {
 
                 if (message) {
                     self.targetMessage = message;
-
-                    var urlReg = new RegExp(/[\w]+:\/\/[\S]+/);
+                    var urlReg = new RegExp(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/g);
+                    //var urlReg = new RegExp(/[\w]+:\/\/[\S]+/);
                     var urlTextArray = message.match(urlReg);
 
                     if (urlTextArray && _.isArray(urlTextArray)) {
@@ -47,8 +47,6 @@ flockApp.directive('highlightTags', function ($compile, $rootScope) {
             var newElement = createTags(scope.ngModel, attrs.callbackFn);
             $compile(newElement)(scope);
            element.before(newElement);
-            
-           
         }
     };
 });

@@ -15,9 +15,13 @@ namespace Flock.DataAccess.Repositories.Interfaces
 
         IQueryable<Quack> GetQuacksByLastNameAndFirstName(string lastName, string firstName);
         IList<Quack> GetAllQuacks();
+        IList<Quack> GetAllQuacksByIdList(List<int> idList);
         void DeleteQuack(int id);
+        void ActivateQuack(int id);
         void UpdateQuack(int quackId);
         IList<Quack> GetAllReplies(int quackId);
         IList<Quack> GetQuacksInfo(int conversationId);
+        double GetQuackID(Quack quack);
+        Quack GetQuackById(int id);
     }
 }

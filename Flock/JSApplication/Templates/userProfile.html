@@ -2,14 +2,14 @@
     <!--Header Section-->
     
     
-    <div class="container">
-            <!--Cover Pic Section-->
-            <div ng-controller="userProfileController">
-                    
-                    <div>
+    <div ng-controller="userProfileController" class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-7">
+                
+                <div class="center" style="max-width: 725px;">
                         <!--Nav Bar-->
-                        <div style="background-color: black; width: 880px; height: 60px;">
-                            <div style="background-color: #ef4135; width: 150px; height: 60px; display: block; float: left">
+                        <div style="background-color: black; height: 60px; position: fixed; top: 0; width: 57.366666666666666666%; max-width: 725px; z-index: 100;">
+                            <div style="background-color: #ef4135; height: 60px; display: block; float: left">
                                 <h1 class="flocklogo"><span class="glyphicon glyphicon-send" style="color: white;"></span><a class="text-center" href="/#" style="font-family: 'Oswald', sans-serif; margin: 5px; text-decoration: none; color: white;">Flock</a></h1>
                             </div><!--/.container-fluid -->
                             <div style="width: 150px; height: 60px; display: block; float: right">
@@ -19,19 +19,19 @@
                             </div>
                         </div>
                         
-                        <div style="position: relative; background-color: rgba(0, 182, 255, 0.61) ; height: 330px; margin-top:10px;">
+                        <div style="position: relative; background-color: rgba(0, 182, 255, 0.61) ; height: 281px; margin-top:70px;">
                             <!--COVER-->
-                            <div class="coverbox round-corner" style="height: 330px;">
-                                <img id="userCoverPic" ng-src="{{userProfile.CoverImage}}" class="img-responsive" style="height: 330px; z-index: -10;" />
+                            <div class="coverbox round-corner" style="height: 281px;">
+                                <img id="userCoverPic" ng-src="{{userProfile.CoverImage}}" class="img-responsive" style="z-index: -10; height: 281px;" />
                             </div>
 
                             <!-- Profile photo-->
-                            <div class="profileoverlay" style="position: relative; top: 0; left: 0; height: 330px; margin-top: -330px;">
-                                <div style="height: 190px; position: absolute; top: 120px;">
-                                <div style="float: left; margin-left: 20px; width: 160px;">
-                                    <img class="img-thumbnail img-rounded media-object" style="margin-left:auto; margin-right: auto; height: 190px; width: 160px; border-color: dimgray; border-width: 2px;" ng-src="{{userProfile.ProfileImage}}" />                                
+                            <div class="profileoverlay" style="position: relative; top: 0; left: 0; height: 281px; margin-top: -281px;">
+                                <div style="height: 140px; position: absolute; top: 120px;">
+                                <div style="float: left; margin-left: 20px; width: 120px;">
+                                    <img class="img-thumbnail img-rounded media-object" style="margin-left:auto; margin-right: auto; height: 140px; width: 120px; border-color: dimgray; border-width: 2px;" ng-src="{{userProfile.ProfileImage}}" />                                
                                 </div>
-                                <div style="float: left; margin-left:15px; margin-top:95px;">
+                                <div style="float: left; margin-left:15px; margin-top:45px;">
                                     <h3 class="text-center" style="margin: 5px; margin-left: 2px; color: white;"><strong>{{userProfile.FirstName}} {{userProfile.LastName}}</strong></h3>    
                                     <h5 class="pull-left" style="margin: 2px; color: white"><a style="color: white;" href="mailto:{{userProfile.EmailId}}">{{userProfile.EmailId}}</a></h5><br/>
                                     <h5 class="pull-left" style="margin: 2px; color: white">Project: {{userProfile.Project}}</h5><br/>
@@ -51,7 +51,8 @@
                             <div class="span4 pull-center">{{userProfile.Interests}}</div>-->
 
                     </div>  
-                         
+                        
+                <div class="center" style="max-width: 725px;">
                     <div class="span8 pull-center">&nbsp;</div>                  
                     
                     <!-- QUACKS-->
@@ -60,11 +61,22 @@
                             <simple-quack />
                         </div>
                     </div>
-                    
+                </div> 
+                
 
-                </div>              
-
-            </div>            
+            </div>
+            <div class="col-sm-4">
+                <div class="rightcontainer" id="announcements">
+                    <ul class="list-group">
+                        <li class="list-group-item">Latest Announcements</li>
+                        <li class="list-group-item">Front Office Events</li>
+                        <li class="list-group-item">Project Updates</li>
+                        <li class="list-group-item">New Hire Welcomes</li>
+                        <li class="list-group-item">Birthdays & Announcements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 </div>
 
 <ng-include src="'../JSApplication/Templates/quackUserLikes.html'"></ng-include>

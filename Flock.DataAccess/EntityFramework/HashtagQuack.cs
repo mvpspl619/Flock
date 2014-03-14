@@ -15,12 +15,16 @@ namespace Flock.DataAccess.EntityFramework
 using System;
     using System.Collections.Generic;
     
-public partial class HashTag
+public partial class HashtagQuack
 {
 
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public int HashTagId { get; set; }
+
+    public int QuackId { get; set; }
+
+    public bool Active { get; set; }
 
 }
 

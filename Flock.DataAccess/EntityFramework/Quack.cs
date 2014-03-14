@@ -25,8 +25,6 @@ public partial class Quack
 
         this.QuackLikes = new HashSet<QuackLike>();
 
-        this.HashTags = new HashSet<HashTag>();
-
     }
 
 
@@ -61,8 +59,6 @@ public partial class Quack
     public virtual User User { get; set; }
 
     public virtual ICollection<QuackLike> QuackLikes { get; set; }
-
-    public virtual ICollection<HashTag> HashTags { get; set; }
 
 }
 

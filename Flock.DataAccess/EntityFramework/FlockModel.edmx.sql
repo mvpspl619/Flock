@@ -1,8 +1,8 @@
 
 -- --------------------------------------------------
--- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/19/2014 12:58:11
+-- Date Created: 03/11/2014 12:42:06
 -- Generated from EDMX file: C:\Users\mandapav\Desktop\FlockV2\Flock.DataAccess\EntityFramework\FlockModel.edmx
 -- --------------------------------------------------
 
@@ -81,6 +81,12 @@ IF OBJECT_ID(N'[dbo].[QuackLikes]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
     DROP TABLE [dbo].[sysdiagrams];
+GO
+IF OBJECT_ID(N'[dbo].[HashTags]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HashTags];
+GO
+IF OBJECT_ID(N'[dbo].[HashtagQuacks]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HashtagQuacks];
 GO
 
 -- --------------------------------------------------
@@ -195,10 +201,12 @@ CREATE TABLE [dbo].[HashTags] (
 );
 GO
 
--- Creating table 'HashTagQuack'
-CREATE TABLE [dbo].[HashTagQuack] (
-    [HashTags_Id] int  NOT NULL,
-    [Quacks_ID] int  NOT NULL
+-- Creating table 'HashtagQuacks'
+CREATE TABLE [dbo].[HashtagQuacks] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [HashTagId] int  NOT NULL,
+    [QuackId] int  NOT NULL,
+    [Active] bit  NOT NULL
 );
 GO
 
@@ -272,10 +280,10 @@ ADD CONSTRAINT [PK_HashTags]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [HashTags_Id], [Quacks_ID] in table 'HashTagQuack'
-ALTER TABLE [dbo].[HashTagQuack]
-ADD CONSTRAINT [PK_HashTagQuack]
-    PRIMARY KEY NONCLUSTERED ([HashTags_Id], [Quacks_ID] ASC);
+-- Creating primary key on [Id] in table 'HashtagQuacks'
+ALTER TABLE [dbo].[HashtagQuacks]
+ADD CONSTRAINT [PK_HashtagQuacks]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -410,29 +418,6 @@ ADD CONSTRAINT [FK_QuackLikes_Users]
 CREATE INDEX [IX_FK_QuackLikes_Users]
 ON [dbo].[QuackLikes]
     ([UserId]);
-GO
-
--- Creating foreign key on [HashTags_Id] in table 'HashTagQuack'
-ALTER TABLE [dbo].[HashTagQuack]
-ADD CONSTRAINT [FK_HashTagQuack_HashTag]
-    FOREIGN KEY ([HashTags_Id])
-    REFERENCES [dbo].[HashTags]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Quacks_ID] in table 'HashTagQuack'
-ALTER TABLE [dbo].[HashTagQuack]
-ADD CONSTRAINT [FK_HashTagQuack_Quack]
-    FOREIGN KEY ([Quacks_ID])
-    REFERENCES [dbo].[Quacks]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_HashTagQuack_Quack'
-CREATE INDEX [IX_FK_HashTagQuack_Quack]
-ON [dbo].[HashTagQuack]
-    ([Quacks_ID]);
 GO
 
 -- --------------------------------------------------

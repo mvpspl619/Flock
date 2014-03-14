@@ -26,8 +26,11 @@ namespace Flock.DataAccess.Repositories.Concrete
 
         public double GetQuackID(Quack quack)
         {
-            //var quack = _context.Quacks
-            //    .Where(q=>q.)
+            //var singleQuack = _context.Quacks
+            //    .Where(q=>q.QuackContent == quack.QuackContent)
+            //    .Where(q=>q.QuackType == quack.QuackType)
+            //    .Where(q=>q.LastModifiedDate == quack.LastModifiedDate)
+            //    .Where(q=>q.User == quack.User).ToList();
             return 0;
         }
 
@@ -41,6 +44,27 @@ namespace Flock.DataAccess.Repositories.Concrete
 
         }
 
+        public Quack GetQuackById(int id)
+        {
+            var quack = _context.Quacks
+                .Where(q => q.ID == id)
+                .Include("QuackContent")
+                .Include("User")
+                .Include("QuackType").ToList().FirstOrDefault();
+            return quack;
+        }
+
+        IList<Quack> IQuackRepository.GetAllQuacksByIdList(List<int> idList)
+        {
+            IList<Quack> quackList = new List<Quack>();
+            foreach (var id in idList)
+            {
+                Quack singleQuack = GetQuackById(id);
+                quackList.Add(singleQuack);
+            }
+            return quackList.OrderByDescending(q => q.LastModifiedDate).ToList();
+        }
+
         IList<Quack> IQuackRepository.GetAllQuacks()
         {
             var quacks = _context.Quacks
@@ -48,17 +72,28 @@ namespace Flock.DataAccess.Repositories.Concrete
                 .Include("User")
                 .Include("QuackType");
             //TODO: Paging
-            return quacks.Where(quack => quack.Active && quack.QuackTypeID ==1)
-                .OrderByDescending(quack => quack.LastModifiedDate )
-                .Take(200)
+            //return quacks.Where(quack => quack.Active && quack.QuackTypeID ==1)
+            //    .OrderByDescending(quack => quack.LastModifiedDate )
+            //    .Take(200)
+            //    .ToList();
+            var finalList = quacks.Where(quack => quack.Active && quack.QuackTypeID == 1)
+                .OrderByDescending(quack => quack.LastModifiedDate)
                 .ToList();
+            return finalList;
         }
 
         public void DeleteQuack(int quackId)
         {
             var quack = base.GetById(quackId);
             quack.Active = false;
-            base.Delete(quack);
+            base.Update(quack);
+        }
+
+        public void ActivateQuack(int quackId)
+        {
+            var quack = base.GetById(quackId);
+            quack.Active = true;
+            base.Update(quack);
         }
 
         public void UpdateQuack(int quackId)
@@ -68,7 +103,7 @@ namespace Flock.DataAccess.Repositories.Concrete
             base.Update(currentQuack);
         }
 
-        public IList<Quack>  GetAllReplies(int quackId)
+        public IList<Quack> GetAllReplies(int quackId)
         {
             var quacks = _context.Quacks
                 .Include("QuackContent")

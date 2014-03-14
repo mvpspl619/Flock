@@ -15,6 +15,28 @@ namespace Flock.DataAccess.Repositories.Concrete
         {
         }
 
+        public void DeleteQuackLike(int quackId)
+        {
+            var allQuackLikes = base.GetAll().ToArray();
+            var quackLikesToDelete = allQuackLikes.Where(q => q.QuackId == quackId);
+            foreach (var singleQuackLike in quackLikesToDelete)
+            {
+                singleQuackLike.Active = false;
+                base.Update(singleQuackLike);
+            }
+        }
+
+        public void ActivateQuackLike(int quackId)
+        {
+            var allQuackLikes = base.GetAll().ToArray();
+            var quackLikesToDelete = allQuackLikes.Where(q => q.QuackId == quackId);
+            foreach (var singleQuackLike in quackLikesToDelete)
+            {
+                singleQuackLike.Active = true;
+                base.Update(singleQuackLike);
+            }
+        }
+
         public void UpdateQuackLike(QuackLike quackLike)
         {
             var allQuackLikes = base.GetAll().ToArray();

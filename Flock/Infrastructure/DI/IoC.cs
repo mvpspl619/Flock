@@ -44,6 +44,7 @@ namespace Flock.Infrastructure.DI {
                             x.For<IImageFacade>().Use<ImageFacade>();
                             x.For<IQuackLikeRepository>().Use<QuackLikeRepository>();
                             x.For<IHashTagRepository>().Use<HashTagRepository>();
+                            x.For<IHashtagQuackRepository>().Use<HashtagQuackRepository>();
                         });
             return ObjectFactory.Container;
         }

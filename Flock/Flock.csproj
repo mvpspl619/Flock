@@ -174,7 +174,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ReloadController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SearchViewController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserViewController.cs" />
     <Compile Include="DTO\QuackDto.cs" />
@@ -199,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\MapperProfile\IAutoMap.cs" />
+    <Compile Include="Models\QuacksList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +219,7 @@
     <Content Include="Content\flock.css" />
     <Content Include="Content\FlockApplication.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\background.png" />
     <Content Include="Content\images\duck_moving.gif" />
     <Content Include="Content\images\GuestInfo.png" />
     <Content Include="Content\images\AboutPageLong.jpg" />
@@ -235,6 +239,7 @@
     <Content Include="Content\images\replies.png" />
     <Content Include="Content\images\roadShow.png" />
     <Content Include="Content\images\small.jpg" />
+    <Content Include="Content\images\spinner.gif" />
     <Content Include="Content\images\teamouting.png" />
     <Content Include="Content\images\title-bg.jpg" />
     <Content Include="Content\imgareaselect-animated.css" />
@@ -301,16 +306,20 @@
     <Content Include="Content\Site.css" />
     <Content Include="JSApplication\Controllers\postImageQuackController.js" />
     <Content Include="JSApplication\Controllers\quackUserLikesController.js" />
+    <Content Include="JSApplication\Controllers\searchPageController.js" />
     <Content Include="JSApplication\Controllers\uploadImageController.js" />
     <Content Include="JSApplication\Controllers\uploadProfileImageController.js" />
     <Content Include="JSApplication\Controllers\userInfoController.js" />
     <Content Include="JSApplication\Controllers\userPageController.js" />
     <Content Include="JSApplication\Controllers\userProfileController.js" />
     <Content Include="JSApplication\Directives\autoUpdateUserTags.js" />
+    <Content Include="JSApplication\Directives\comment.js" />
     <Content Include="JSApplication\Directives\simpleQuack.js" />
     <Content Include="JSApplication\Directives\highlightTags.js" />
     <Content Include="JSApplication\Directives\onEnter.js" />
     <Content Include="JSApplication\Directives\quack.js" />
+    <Content Include="JSApplication\Directives\userLike.js" />
+    <Content Include="JSApplication\Factories\QuacksFactory.js" />
     <Content Include="JSApplication\main.js" />
     <Content Include="JSApplication\Services\searchService.js" />
     <Content Include="JSApplication\Factories\sessionFactory.js" />
@@ -321,9 +330,12 @@
     <Content Include="JSApplication\Templates\backupchangePhoto.html" />
     <Content Include="JSApplication\Templates\changePhoto.html" />
     <Content Include="JSApplication\Templates\changeProfilePic.html" />
-    <Content Include="JSApplication\Templates\quack.html" />
-    <Content Include="JSApplication\Templates\simpleQuack.html" />
+    <Content Include="JSApplication\Templates\comment.html" />
     <Content Include="JSApplication\Templates\userPage.html" />
+    <Content Include="JSApplication\Templates\quack.html" />
+    <Content Include="JSApplication\Templates\searchPage.html" />
+    <Content Include="JSApplication\Templates\simpleQuack.html" />
+    <Content Include="JSApplication\Templates\userLike.html" />
     <Content Include="JSApplication\Templates\Guest.html" />
     <Content Include="JSApplication\Templates\postImageQuack.html" />
     <Content Include="JSApplication\Templates\quackUserLikes.html" />
@@ -365,6 +377,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\ng-infinite-scroll.js" />
+    <Content Include="Scripts\ui-bootstrap-0.10.0.min.js" />
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -384,6 +398,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\underscore.min.map" />
     <Content Include="Views\UserView\Index.cshtml" />
+    <Content Include="Views\SearchView\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

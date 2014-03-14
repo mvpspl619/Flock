@@ -195,8 +195,8 @@ namespace Flock.Facade.Concrete
             byte[] data = Convert.FromBase64String(src);
             
             Image imgPhoto = Image.FromStream(new MemoryStream(data));
-            var newImage = new Bitmap(160, 160);
-            Graphics.FromImage(newImage).DrawImage(imgPhoto, 0, 0, 160, 160);
+            var newImage = new Bitmap(120, 160);
+            Graphics.FromImage(newImage).DrawImage(imgPhoto, 0, 0, 120, 160);
 
             newImage.Save(imgMemoryStream, ImageFormat.Jpeg);
             

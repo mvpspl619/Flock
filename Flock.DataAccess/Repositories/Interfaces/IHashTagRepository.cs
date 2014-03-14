@@ -9,7 +9,9 @@ namespace Flock.DataAccess.Repositories.Interfaces
 {
     public interface IHashTagRepository
     {
-        void SaveHashTag(HashTag hashtag);
+        void SaveHashTag(HashTag hashTag);
+        bool CheckHashTag(HashTag hashTag);
+        int GetHashTagId(HashTag hashTag);
         //IList<Quack> GetAllQuacks(string hashTag);
     }
 }

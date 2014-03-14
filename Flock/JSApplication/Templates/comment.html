@@ -1,0 +1,29 @@
+﻿<div class="commentprofileholder">
+                                        
+<!--Profile photo-->
+                                            <div class="commentuserphoto pull-left">
+                                                <a class="pull-left" href="" ng-click="openProfilePageByGivenName(reply.UserDisplayName)">
+                                                    <img class="media-object img-thumbnail littleprofileimage" ng-src="data:image/jpeg;base64,{{reply.UserImage}}" />
+                                                </a> 
+                                            </div>
+                                        
+                                            <!--Profile name-->
+                                            <div class="commentuserdetails pull-left">
+                                            
+                                                <div class="commentusername">
+                                                    <a class="media-heading userprofilename ng-binding" style="font-size: 12px;" href="" ng-click="openProfilePageByGivenName(reply.UserDisplayName)">{{reply.UserDisplayName}}</a>
+                                                    <span class="userprofiletime">&middot;{{reply.TimeSpan}}</span>
+
+                                                    <button type="button" class="close pull-right" ng-click="deleteQuack(reply.Id)"
+                                                            style="margin-left: 2px; margin-right: 5px; font-weight: bold; font-size: 14px !important;" ng-show="reply.ShowDelete" aria-hidden="true">
+                                                        x</button>
+                                                </div>
+                                            
+                                                <div class="commentusercomment" style="font-size:11px;">
+                                                    <p>
+                                                        <span highlight-tags callback-fn="onLinkClick" ng-model="reply.Message"></span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                        </div>                                            

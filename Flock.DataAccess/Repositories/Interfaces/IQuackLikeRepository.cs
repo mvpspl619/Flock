@@ -11,5 +11,7 @@ namespace Flock.DataAccess.Repositories.Interfaces
     {
         void UpdateQuackLike(QuackLike quackLike);
         List<QuackLike> GetUserLikesInfo(int quackId);
+        void DeleteQuackLike(int quackId);
+        void ActivateQuackLike(int quackId);
     }
 }

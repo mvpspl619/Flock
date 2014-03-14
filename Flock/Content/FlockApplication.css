@@ -177,13 +177,13 @@
 }
 
 .userprofilename {
-    color: #484848; 
-    font: bold 13px/16px Arial, sans-serif ;
+    color: #484848;
+    font: bold 14px Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
 }
 
 .userprofiletime {
     color: #707070; 
-    font: normal 11px Arial, sans-serif; 
+    font: normal 11px Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif; 
     margin-top: -3px;
 }
 
@@ -211,7 +211,8 @@
 }
 
 .rightcontainer {
-    width: 320px;
+    min-width: 25%;
+    width: auto;
     height: 96%;
     position: fixed;
     top: 0;
@@ -253,14 +254,15 @@
 }
 
 .quackmessage {
-    font: normal 16px Arial, sans-serif;
+    font: normal 14px Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
     padding: 15px;
     margin: 0;
+    line-height: 1.38;
 }
 
 .likescommentsholder {
     width: 100%;
-    height: 40px;
+    height: 30px;
     margin: 0;
     padding: 0;
     border-top: 2px solid #ef4135;
@@ -268,9 +270,9 @@
 }
 
 .likescommentstext {
-    font: bold 13px/16px Arial, sans-serif;
+    font: bold 13px/16px Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
     text-decoration: none;
-    color: #707070;
+    color: #3276b1;
 }
 
 .likescommentsholder a:hover {
@@ -292,7 +294,7 @@
 }
 
 .commentuserdetails {
-    width: 820px;
+    width: 93%;
     margin: 0px;
     padding-top: 4px;
 }

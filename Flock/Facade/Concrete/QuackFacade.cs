@@ -11,6 +11,7 @@ using Flock.DataAccess.EntityFramework;
 using Flock.DataAccess.Repositories.Interfaces;
 using Flock.Facade.Interfaces;
 using System;
+using Flock.Models;
 
 
 namespace Flock.Facade.Concrete
@@ -22,17 +23,19 @@ namespace Flock.Facade.Concrete
         private readonly IUserRepository _userRepository;
         private readonly IQuackLikeRepository _quackLikeRepository;
         private readonly IHashTagRepository _hashTagRepository;
+        private readonly IHashtagQuackRepository _hashtagQuackRepository;
         private readonly IUserFacade _userFacade;
         private readonly IImageFacade _imageFacade;
 
         public QuackFacade(IQuackRepository quackRepository, IQuackTypeRepository quackTypeRepository, IUserRepository userRepository, IQuackLikeRepository quackLikeRepository, IHashTagRepository hashTagRepository,
-            IUserFacade userFacade, IImageFacade imageFacade)
+            IHashtagQuackRepository hashtagQuackRepository, IUserFacade userFacade, IImageFacade imageFacade)
         {
             _quackRepository = quackRepository;
             _quackTypeRepository = quackTypeRepository;
             _userRepository = userRepository;
             _quackLikeRepository = quackLikeRepository;
             _hashTagRepository = hashTagRepository;
+            _hashtagQuackRepository = hashtagQuackRepository;
             _userFacade = userFacade;
             _imageFacade = imageFacade;
         }
@@ -45,12 +48,12 @@ namespace Flock.Facade.Concrete
         public byte[] ImageToByteArray(Image imageIn)
         {
             MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             return ms.ToArray();
         }
 
 
-        public void SaveQuack(Quack quack)
+        public int SaveQuack(Quack quack)
         {
             //Remove this in production
             //int id = quack.QuackContent.ID;
@@ -86,27 +89,53 @@ namespace Flock.Facade.Concrete
             var regex = new Regex(@"(?<=#)\w+");
             var matches = regex.Matches(quack.QuackContent.MessageText);
 
+            _quackRepository.SaveQuack(quack);
+            int quackId =(int) _quackRepository.GetQuackID(quack);
             foreach (Match m in matches)
             {
                 HashTag hashtag = new HashTag();
                 hashtag.Name = m.ToString();
-                hashtag.Quacks.Add(quack);
-                quack.HashTags.Add(hashtag);
-                _hashTagRepository.SaveHashTag(hashtag);
+                int hashtagId = 0;
+                //check for hashtag
+                if (!_hashTagRepository.CheckHashTag(hashtag))
+                {
+                    _hashTagRepository.SaveHashTag(hashtag);
+                    hashtagId = hashtag.Id;
+                }
+                else
+                {
+                    //get the hashtag id and append
+                    hashtagId = _hashTagRepository.GetHashTagId(hashtag);
+                }
+                HashtagQuack hashtagQuack = new HashtagQuack();
+                hashtagQuack.HashTagId = hashtagId;
+                hashtagQuack.QuackId = quack.ID;
+                _hashtagQuackRepository.SaveHashtagQuack(hashtagQuack);
             }
-            _quackRepository.SaveQuack(quack);
             if (quack.ConversationID != 0)
             {
                 _quackRepository.UpdateQuack(quack.ConversationID);
             }
+            return quack.ID;
+        }
 
+        public QuackDto ReloadQuack(int id)
+        {
+            var userName = HttpContext.Current.User.Identity.Name;
+            var user = _userFacade.GetUserDetails(userName);
+            var qs = _quackRepository.GetQuackById(id);
+            var q = new QuackDto();
+            q = QuackMapper(qs, user.ID);
+            var replies = _quackRepository.GetAllReplies(id);
+            var qReplies = (from reply in replies let qreply = new QuackDto() select QuackMapper(reply)).ToList();
+            q.QuackReplies = qReplies;
+            q.Replies = replies.Count(qq => qq.Active);
+            return q;
         }
 
         public void GetQuack(int id)
         {
             _quackRepository.GetQuack(id);
-
-
         }
         public IList<QuackDto> GetQuacksInfo(int conversationId)
         {
@@ -127,18 +156,71 @@ namespace Flock.Facade.Concrete
         private string VerifyLikeOrUnLike(Quack quack, int userId)
         {
             var check = quack.QuackLikes.FirstOrDefault(q => q.UserId == userId && q.Active && q.QuackId == quack.ID && q.Active);
-            return check == null ? "Like" : "UnLike";
+            return check == null ? "like" : "unlike";
         }
 
-        public IList<QuackDto> GetAllQuacks()
+        public QuacksList GetAllQuacks(int quackCount)
+        {
+            QuacksList returningList = new QuacksList();
+            try
+            {
+                var userName = HttpContext.Current.User.Identity.Name;
+                var user = _userFacade.GetUserDetails(userName);
+
+                var quacks = _quackRepository.GetAllQuacks();
+                returningList.QuackCount = quacks.Count;
+                var quackResults = new List<QuackDto>();
+
+                for (int i = quackCount; i < quackCount + 5; i++)
+                {
+                    var quack = quacks[i];
+                    var q = new QuackDto();
+                    q = QuackMapper(quack, user.ID);
+                    var replies = _quackRepository.GetAllReplies(quack.ID);
+                    var qReplies = (from reply in replies let qreply = new QuackDto() select QuackMapper(reply)).ToList();
+                    q.QuackReplies = qReplies;
+                    q.Replies = replies.Count(qq => qq.Active);
+                    quackResults.Add(q);
+                }
+                returningList.Quacks = quackResults;
+                return returningList;
+            }
+            catch (Exception)
+            {
+                var userName = HttpContext.Current.User.Identity.Name;
+                var user = _userFacade.GetUserDetails(userName);
+
+                var quacks = _quackRepository.GetAllQuacks();
+                var quackResults = new List<QuackDto>();
+                returningList.QuackCount = quacks.Count;
+                for (int i = quackCount; i < quacks.Count; i++)
+                {
+                    var quack = quacks[i];
+                    var q = new QuackDto();
+                    q = QuackMapper(quack, user.ID);
+                    var replies = _quackRepository.GetAllReplies(quack.ID);
+                    var qReplies = (from reply in replies let qreply = new QuackDto() select QuackMapper(reply)).ToList();
+                    q.QuackReplies = qReplies;
+                    q.Replies = replies.Count(qq => qq.Active);
+                    quackResults.Add(q);
+                }
+                returningList.Quacks = quackResults;
+                return returningList;
+            }
+        }
+
+        public IList<QuackDto> GetAllQuacksbyHashtag(string hashtag)
         {
             var userName = HttpContext.Current.User.Identity.Name;
             var user = _userFacade.GetUserDetails(userName);
-
-            var quacks = _quackRepository.GetAllQuacks();
+            //read the quackids from hashtagQuacks
+            var hashtagId = _hashTagRepository.GetHashTagId(new HashTag { Name = hashtag });
             var quackResults = new List<QuackDto>();
+            //get every single quack
+            List<int> quackIds = _hashtagQuackRepository.GetQuackIdsByHashtagId(hashtagId);
 
-            foreach (var quack in quacks)
+            var quacksList = _quackRepository.GetAllQuacksByIdList(quackIds);
+            foreach (var quack in quacksList)
             {
                 var q = new QuackDto();
                 q = QuackMapper(quack, user.ID);
@@ -147,9 +229,7 @@ namespace Flock.Facade.Concrete
                 q.QuackReplies = qReplies;
                 q.Replies = replies.Count(qq => qq.Active);
                 quackResults.Add(q);
-
             }
-
             return quackResults;
         }
 
@@ -252,7 +332,6 @@ namespace Flock.Facade.Concrete
             return resultQuack;
         }
 
-
         private string GetTimeSpanInformation(DateTime? d)
         {
             var result = "";
@@ -289,6 +368,14 @@ namespace Flock.Facade.Concrete
 
         public void DeleteQuack(int id)
         {
+            //check if it is in hashtagQuack table
+            if (_hashtagQuackRepository.CheckQuackIdExists(id))
+            { 
+                //delete all the hashtags
+                _hashtagQuackRepository.DeleteHashtagQuacks(id);
+            }
+            //delete likes
+            _quackLikeRepository.DeleteQuackLike(id);
             _quackRepository.DeleteQuack(id);
 
             var conversations = _quackRepository.GetAllReplies(id);
@@ -296,7 +383,28 @@ namespace Flock.Facade.Concrete
             {
                 _quackRepository.DeleteQuack(conversation.ID);
             }
+        }
 
+        public void ActivateQuack(int id)
+        {
+            //activate the hashtags
+            if (_hashtagQuackRepository.CheckQuackIdExists(id))
+            {
+                //delete all the hashtags
+                _hashtagQuackRepository.ActivateHashtagQuacks(id);
+            }
+            _quackLikeRepository.ActivateQuackLike(id);
+            _quackRepository.ActivateQuack(id);
+
+            var conversations = _quackRepository.GetAllReplies(id);
+            foreach (var conversation in conversations)
+            {
+                _quackRepository.ActivateQuack(conversation.ID);
+            }
+        }
+
+        public void UndoDeleteQuack(int id)
+        {
 
         }
 
@@ -307,8 +415,6 @@ namespace Flock.Facade.Concrete
 
             _quackRepository.UpdateQuack(quackId);
         }
-
-
 
         public IList<QuackDto> GetQuacksByLastNameAndFirstName(string lastName, string firstName)
         {

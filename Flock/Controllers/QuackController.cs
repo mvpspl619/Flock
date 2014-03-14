@@ -9,6 +9,7 @@ using Flock.DTO;
 using Flock.DataAccess.EntityFramework;
 using Flock.Facade;
 using Flock.Facade.Interfaces;
+using Flock.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -33,35 +34,43 @@ namespace Flock.Controllers
         [POST("save")]
         public HttpResponseMessage Post(Quack quack)
         {
-            _quackFacade.SaveQuack(quack);
-            return Request.CreateResponse(HttpStatusCode.Created, "true");
+            int createdQuackId = _quackFacade.SaveQuack(quack);
+            return Request.CreateResponse(HttpStatusCode.Created, createdQuackId);
         }
 
-        [PUT("deleteQuack")]
-        public HttpResponseMessage Put(int quackId)
+        [PUT("updateQuack")]
+        public HttpResponseMessage Put(int quackId, int status)
         {
-            _quackFacade.DeleteQuack(quackId);
-            return Request.CreateResponse(HttpStatusCode.Created, "true");
+            if (status == 0)
+            {
+                _quackFacade.DeleteQuack(quackId);
+                return Request.CreateResponse(HttpStatusCode.Created, true);    
+            }
+            else if (status == 1)
+            {
+                _quackFacade.ActivateQuack(quackId);
+                return Request.CreateResponse(HttpStatusCode.Created, true);    
+            }
+            return Request.CreateResponse(HttpStatusCode.Created, false);
         }
-
+        
         [GET("activeQuacks")]
-        public IList<QuackDto> GetAllActiveQuacks()
+        public QuacksList GetAllActiveQuacks(int quackCount)
         {
-           return _quackFacade.GetAllQuacks();
+           return _quackFacade.GetAllQuacks(quackCount);
         }
 
-        [GET("hashtags")]
-        public IList<QuackDto> GetAllQuacksWithHashtag(string hashTag)
+        [GET("quacksByHashtag")]
+        public IList<QuackDto> GetAllQuacksByHashtag(string hashtag)
         {
-            return _quackFacade.GetAllQuacksWithHashtag(hashTag);
+            return _quackFacade.GetAllQuacksbyHashtag(hashtag);
         }
-
 
         [POST("likeOrUnlikeQuack")]
         public HttpResponseMessage Post(int quackId, int userId, bool isLike)
         {
             _quackFacade.LikeOrUnlikeQuack(quackId, userId, isLike);
-            return Request.CreateResponse(HttpStatusCode.Created, "true");
+            return Request.CreateResponse(HttpStatusCode.Created, true);
         }
 
 

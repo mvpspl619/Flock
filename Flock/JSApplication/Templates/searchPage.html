@@ -1,4 +1,5 @@
-﻿<div ng-controller="userPageController" style="height: 100%;">
+﻿
+<div ng-controller="searchPageController" style="background: url('../../Content/images/background.png') no-repeat fixed; background-color: rgb(44, 43, 43); height: 100%;">
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-7">
@@ -30,7 +31,6 @@
                     <!--COVER-->
                     <div class="coverbox round-corner" style="background-color: lightblue;">
                         <img id="userCoverPic" class="img-responsive" style="z-index: -10; height: 281px;" />
-                        <a id="changeCoverButton" style="position: absolute; bottom: 5px; right: 5px;" data-target="#changePictureModel" data-toggle="modal" class="btn btn-sm btn-danger">change cover</a>
                     </div>
 
                     <!-- Profile photo-->
@@ -39,9 +39,7 @@
                             <div style="float: left; margin-left: 20px; width: 120px;">
                                 <a id="profilebox" href="" ng-click="openProfilePageByGivenName(displayName)">
                                     <img id="userProfilePic" class="media-object img-rounded img-thumbnail img-responsive" ng-src="{{userProfilePicUrl}}" style="margin-left:auto; margin-right: auto; height: 140px; width: 120px; border-color: dimgray; border-width: 2px;" />
-                                </a>
-                                <a id="changeProfile" style="position: absolute; top: 80%; left: 11%;"  class="btn btn-xs btn-danger" data-target="#changeProfilePictureModel" data-toggle="modal">change</a>
-                                    
+                                </a>   
                             </div>
                             <div style="float: left; margin-left:15px; margin-top:115px;">
                                 <h3 class="text-center" style="margin: 0;"><a style="text-decoration: none; color: white;" href="" ng-click="openProfilePageByGivenName(displayName)"><strong>{{displayName}}</strong></a></h3>
@@ -60,34 +58,21 @@
         
                 <!--QuackContents-->
                 <!--New Quack-->
-                <div class="insidecontainer" style="height: 120px; margin-bottom: 15px;">
-                    <div id="postnewquack" style="width:100%; height: 120px; float: right; position: relative;">
-                        <div class="textareacontainer" style="height: 70px; margin: 0; display:block; background-color: white;">
-                            <textarea id="Textarea1" class="mainQuack" placeholder="Your Quack..." ng-model="messageContent" maxlength="300" style="border: 0; padding: 10px;overflow: hidden; height: 70px; width: 100%; color: rgb(128, 128, 128); "
-                                      ng-disabled=" disableQuackMessage" on-enter="saveQuack()"></textarea>
-                        </div>
-                        <div id="buttons" style="background-color:rgb(0, 0, 0); height: 50px; width: 100%; position: absolute; top: 70px;">
-                            <a class="btn btn-success pull-right" style="margin-right: 10px; margin-top: 7px;" ng-click="saveQuack()">Post Quack</a>
-                            <a class="btn btn-primary pull-left" data-toggle="modal" data-target="#postImageQuack" onclick="copytexttoimagequack()" style="margin-left: 10px; margin-top: 7px;">Add photo</a>
-                        </div>
-                    </div>
-                </div>
+                <div class="insidecontainer text-center" style="font-size:26px; background:white; border-radius:4px; height: 50px; margin-bottom: 15px;">
+                <p style="vertical-align:middle; padding-top:5px;">Results for #{{searchQuery}}</p>
+            </div>
             
 
                 <div class="well span8" style="background: none; height: auto; margin: 0px; padding: 0px; border: 0;">
-                    <!--OBJECT - QUACK-->
-                    <div infinite-scroll='getNewQuacks()' infinite-scroll-distance='1'></div>
-                    <div ng-repeat="quack in quacks" style="margin-bottom: 0px;">
+                <!--OBJECT - QUACK-->
+                <div ng-repeat="quack in quacks" style="margin-bottom: 0px;">
 
-                        <!--Begin, Quack user pic--------------------------------------------------------------------------------------------------------------------------------------------------------------->
-                        <quack />
+                    <!--Begin, Quack user pic--------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <quack />
 
-                    </div>
-                    <div class="quacksLoading text-center" ng-show="loadedQuacks!=quackCount" style="background: white; border-radius:4px; padding-top: 15px; padding-bottom:15px; margin-bottom: 15px;">
-                        <img src="../../Content/images/spinner.gif" width="32px" height="32px"/>
-                    </div>
-                    <!--Delete in Production-->
                 </div>
+                <!--Delete in Production-->
+            </div>
             </div>
 
         </div>
@@ -99,29 +84,29 @@
                 <li class="list-group-item">Project Updates</li>
                 <li class="list-group-item">New Hire Welcomes</li>
                 <li class="list-group-item">Birthdays & Announcements</li>
-            </ul>
+                </ul>
         </div>
     </div>
     </div>
-    
-    <!--<div id="rightcontainer" style="width: 18%; position: fixed; right: 0; top: 10%; margin: 0px; z-index: 1000; display: block; float: right;">
-       <img src="../../Content/images/happenings.png"/>
-       <img src="../../Content/images/potluck.png"/>
-       <img src="../../Content/images/teamouting.png" style="margin-left: -20px;"/>
-    </div>-->
-
-    <ng-include src="'JSApplication/Templates/changePhoto.html'"></ng-include>
-    <ng-include src="'JSApplication/Templates/changeProfilePic.html'"></ng-include>
-    <ng-include src="'JSApplication/Templates/quackUserLikes.html'"></ng-include>
-    <ng-include src="'JSApplication/Templates/SearchWindow.html'"></ng-include>
-    <ng-include src="'JSApplication/Templates/About.html'"></ng-include>
-    <ng-include src="'JSApplication/Templates/userInfo.html'"></ng-include>
-    <ng-include src="'JSApplication/Templates/postImageQuack.html'"></ng-include>
+    <ng-include src="'../JSApplication/Templates/changePhoto.html'"></ng-include>
+    <ng-include src="'../JSApplication/Templates/changeProfilePic.html'"></ng-include>
+    <ng-include src="'../JSApplication/Templates/quackUserLikes.html'"></ng-include>
+    <ng-include src="'../JSApplication/Templates/SearchWindow.html'"></ng-include>
+    <ng-include src="'../JSApplication/Templates/About.html'"></ng-include>
+    <ng-include src="'../JSApplication/Templates/userInfo.html'"></ng-include>
+    <ng-include src="'../JSApplication/Templates/postImageQuack.html'"></ng-include>
     
 
 </div>
 
+<div class="well span8" style="background: none; height: auto; margin: 0px; padding: 0px; border: 0;">
+                <!--OBJECT - QUACK-->
+                <div ng-repeat="quack in quacks" style="margin-bottom: 0px;">
 
+                    <!--Begin, Quack user pic--------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                    <quack />
 
-
+                </div>
+                <!--Delete in Production-->
+            </div>
 

@@ -17,26 +17,22 @@ namespace Flock
                         "~/Scripts/html5shiv.js",
                         "~/Scripts/respond.js"
                         ));
-            bundles.Add(new ScriptBundle("~/bundles/angularroutejs").Include(
-                "~/Scripts/angular-route.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                 "~/Scripts/angular.js"
                 ));
-
+            bundles.Add(new ScriptBundle("~/bundles/angularroutejs").Include(
+                "~/Scripts/angular-route.js",
+                "~/Scripts/ng-infinite-scroll.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/underScorejs").Include(
                 "~/Scripts/underscore.js"
                 ));
-
-
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
-
             bundles.Add(new ScriptBundle("~/bundles/JSApplication").Include(
                 "~/JSApplication/main.js",
                 "~/JSApplication/Factories/sessionFactory.js",
@@ -50,6 +46,7 @@ namespace Flock
                 "~/JSApplication/Controllers/uploadProfileImageController.js",
                  "~/JSApplication/Controllers/quackUserLikesController.js",
                  "~/JSApplication/Controllers/userPageController.js",
+                 "~/JSApplication/Controllers/searchPageController.js",
                  "~/JSApplication/Controllers/userInfoController.js",
                  "~/JSApplication/Controllers/userProfileController.js",
                  "~/JSApplication/Controllers/postImageQuackController.js",
@@ -61,7 +58,9 @@ namespace Flock
                  "~/JSApplication/Directives/setTitle.js",
                  "~/JSApplication/Directives/highlightTags.js",
                  "~/JSApplication/Directives/quack.js",
-                 "~/JSApplication/Directives/simpleQuack.js"
+                 "~/JSApplication/Directives/simpleQuack.js",
+                 "~/JSApplication/Directives/comment.js",
+                 "~/JSApplication/Directives/userLike.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquerymigrate").Include(

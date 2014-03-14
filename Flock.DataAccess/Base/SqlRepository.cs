@@ -43,6 +43,7 @@ namespace Flock.DataAccess.Base
             {
                 DbSet.Add(entity);
                 SaveChanges();
+                //dbEntityEntry.State = EntityState.Detached;
             }
         }
 
@@ -54,19 +55,31 @@ namespace Flock.DataAccess.Base
             SaveChanges();
         }
 
-        public virtual void Delete(T entity)
+        public void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = _context.Entry(entity);
-            if (dbEntityEntry.State != EntityState.Deleted)
-            {
-                dbEntityEntry.State = EntityState.Deleted;
-            }
-            else
-            {
-                DbSet.Attach(entity);
-                SaveChanges();
-            }
+            _context.Entry(entity).State = System.Data.EntityState.Deleted;
+            Save();
         }
+
+        private void Save()
+        {
+            _context.SaveChanges();
+        }
+
+        //public virtual void Delete(T entity)
+        //{
+        //    DbEntityEntry dbEntityEntry = _context.Entry(entity);
+        //    if (dbEntityEntry.State != EntityState.Deleted)
+        //    {
+        //        dbEntityEntry.State = EntityState.Deleted;
+        //        SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        DbSet.Attach(entity);
+        //        SaveChanges();
+        //    }
+        //}
 
         public virtual void Delete(int id)
         {

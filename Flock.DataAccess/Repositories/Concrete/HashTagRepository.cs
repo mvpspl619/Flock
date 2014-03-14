@@ -25,6 +25,34 @@ namespace Flock.DataAccess.Repositories.Concrete
             base.Add(hashTag);
         }
 
+        public bool CheckHashTag(HashTag hashTag)
+        {
+            IQueryable<HashTag> hashTags = base.GetAll();
+            var hashTagList = hashTags.ToList();
+            foreach (var hashtag in hashTagList)
+            {
+                if (hashtag.Name == hashTag.Name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int GetHashTagId(HashTag hashTag)
+        {
+            IQueryable<HashTag> hashTags = base.GetAll();
+            var hashTagList = hashTags.ToList();
+            foreach (var hashtag in hashTagList)
+            {
+                if (hashtag.Name == hashTag.Name)
+                {
+                    return hashtag.Id;
+                }
+            }
+            return 0;
+        }
+
         //IList<Quack> IHashTagRepository.GetAllQuacks(string hashTag)
         //{
         //    var quacks = _context.Quacks

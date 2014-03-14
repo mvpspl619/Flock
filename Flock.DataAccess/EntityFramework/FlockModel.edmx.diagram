@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="FlockModel.Project" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FlockModel.Quack" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="FlockModel.QuackContent" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlockModel.QuackType" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlockModel.QuackType" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="FlockModel.User" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FlockModel.UserInterest" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FlockModel.UserProject" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
@@ -25,8 +25,8 @@
         <AssociationConnector Association="FlockModel.FK_QuackLikes_Quacks" />
         <AssociationConnector Association="FlockModel.FK_QuackLikes_Users" />
         <EntityTypeShape EntityType="FlockModel.sysdiagram" Width="1.5" PointX="9.875" PointY="9.625" />
-        <EntityTypeShape EntityType="FlockModel.HashTag" Width="1.5" PointX="8.875" PointY="3.75" />
-        <AssociationConnector Association="FlockModel.HashTagQuack" />
+        <EntityTypeShape EntityType="FlockModel.HashTag" Width="1.5" PointX="10" PointY="3.875" />
+        <EntityTypeShape EntityType="FlockModel.HashtagQuack" Width="1.5" PointX="8.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
