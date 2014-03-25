@@ -27,19 +27,19 @@ flockApp.directive('highlightTags', function ($compile, $rootScope) {
                         });
                     }
 
-                    if (self.targetMessage.indexOf('@') >= 0) {
-                        //var allMatches = new RegExp(/@*.+:/).exec(message);
-                        var allMatches = self.targetMessage.split(/@*:/);
-                        _.each(allMatches, function (match) {
-                            match = match.trim();
-                            if (match.substring(0, 1) == "@") {
-                                var names = match.split(" ");
+                    //if (self.targetMessage.indexOf('@') >= 0) {
+                    //    //var allMatches = new RegExp(/@*.+:/).exec(message);
+                    //    var allMatches = self.targetMessage.split(/@*:/);
+                    //    _.each(allMatches, function (match) {
+                    //        match = match.trim();
+                    //        if (match.substring(0, 1) == "@") {
+                    //            var names = match.split(" ");
 
-                                var formattedWord = "<a href='' ng-click=onLinkClick('"+ names[0] +"','" + names[1] + "') style='color:steelblue; font-weight: bold'>" + match + "</a>";
-                                self.targetMessage = self.targetMessage.replace(match, formattedWord);
-                            }
-                        });
-                    }
+                    //            var formattedWord = "<a href='' ng-click=onLinkClick('"+ names[0] +"','" + names[1] + "') style='color:steelblue; font-weight: bold'>" + match + "</a>";
+                    //            self.targetMessage = self.targetMessage.replace(match, formattedWord);
+                    //        }
+                    //    });
+                    //}
                 }
                 return angular.element("<span>" + self.targetMessage + "</span>");
             }            

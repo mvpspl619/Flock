@@ -63,7 +63,7 @@ flockApp.controller('userProfileController', function ($scope, $location, $windo
         });
 
         quackService.getQuacksByFirstNameAndLastName(self.firstName, self.lastName).then(function (quacks) {
-            $scope.quacks = quacks
+            $scope.quacks = quacks;
         }, function (errorInfo) {
             throw new Error(errorInfo);
         });

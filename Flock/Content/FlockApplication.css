@@ -177,7 +177,7 @@
 }
 
 .userprofilename {
-    color: #484848;
+    color: steelblue;
     font: bold 14px Helvetica, Arial, 'lucida grande', tahoma, verdana, arial, sans-serif;
 }
 
@@ -294,7 +294,13 @@
 }
 
 .commentuserdetails {
-    width: 93%;
+    width: 90%;
+    margin: 0px;
+    padding-top: 4px;
+}
+
+.commentuserdelete {
+    width: auto;
     margin: 0px;
     padding-top: 4px;
 }
@@ -325,8 +331,8 @@
 }
 
 .wrapper {
-    width: 880px;
-height: 330px;
+    width: 725px;
+height: 281px;
 overflow: hidden;
 margin: auto;
 cursor: -webkit-grab;

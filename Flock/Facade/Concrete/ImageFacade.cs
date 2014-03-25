@@ -46,7 +46,7 @@ namespace Flock.Facade.Concrete
                     break;
                 case "PreviewCoverPic":
                     {
-                        result = ImagePreview(img, 330, 880);
+                        result = ImagePreview(img, 281, 725);
                     }
                     break;
                

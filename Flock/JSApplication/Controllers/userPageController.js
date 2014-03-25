@@ -109,12 +109,15 @@ flockApp.controller('userPageController', function ($scope, $window, userService
         else {
             quack.conversationId = conversationId;
         }
-        quack.quackContent.messageText = $('#'+element).val();
+        quack.quackContent.messageText = $('#' + element).val();
+        $('#'+element).val("");
         if (quack.quackContent.messageText != "") {
             quackService.saveQuack(quack).then(function (data) {
                 if (data != null) {
-                    //reload the quack
-                    $scope.reloadQuack(passedQuack.Id, $scope.quacks.indexOf(passedQuack), "Comment");
+                    $scope.reloadQuack(passedQuack.Id, $scope.quacks.indexOf(passedQuack));
+                    $scope.quacks[$scope.quacks.indexOf(passedQuack)].ExpandOrCollapse = "Expand";
+                    $scope.quacks[$scope.quacks.indexOf(passedQuack)].ShowConversation = false;
+                    $scope.expandClick($scope.quacks[$scope.quacks.indexOf(passedQuack)]);
                 }
                 $scope.replyMode = false;
                 $scope.replyContent = "";
@@ -208,7 +211,6 @@ flockApp.controller('userPageController', function ($scope, $window, userService
     };
 
     $scope.expandClick = function (quack) {
-        
         quack.ShowConversation = !quack.ShowConversation;
         quack.ExpandOrCollapse = quack.ExpandOrCollapse == "Expand" ? "Collapse" : "Expand";
         
@@ -233,31 +235,7 @@ flockApp.controller('userPageController', function ($scope, $window, userService
                 $scope.quacks[i].ExpandOrCollapse = "Expand";
                 $scope.quacks[i].ShowConversation = false;
             }
-           
         }
-       if (quack.ExpandOrCollapse == "Collapse") {
-           quackService.getQuackInformation(quack.Id).then(function(data)
-           {
-               for (var f = 0; f < data.length ; f++) {
-                   if (!(data[f].UserImage) || data[f].UserImage == "") {
-                       data[f].UserImage = "/Content/images/profilepic.png";
-                   }
-                   //else {
-                   //    data[f].UserImage = "data:image/jpeg;base64," + data[f].UserImage;
-                   //}
-                   
-                   if ($scope.user.ID == data[f].UserId) {
-                       data[f].ShowDelete = true;
-                   } else {
-                       data[f].ShowDelete = false;
-                   }
-                   
-
-               }
-               quack.QuackReplies = data;
-             
-           });
-       }
     };
 
     $scope.deleteQuack = function (quack) {
@@ -268,6 +246,18 @@ flockApp.controller('userPageController', function ($scope, $window, userService
             var undoId = "#quackUndo" + quack.Id;
             $(qId).hide();
             $(undoId).show();
+        });
+    };
+
+    $scope.deleteComment = function(quack, motherQuack) {
+        $scope.deletedQuacks.push(quack);
+        quackService.deleteQuack(quack.Id).then(function (data) {
+            if (data === "true") {
+                $scope.reloadQuack(motherQuack.Id, $scope.quacks.indexOf(motherQuack));
+                $scope.quacks[$scope.quacks.indexOf(motherQuack)].ExpandOrCollapse = "Expand";
+                $scope.quacks[$scope.quacks.indexOf(motherQuack)].ShowConversation = false;
+                $scope.expandClick($scope.quacks[$scope.quacks.indexOf(motherQuack)]);
+            }
         });
     };
 
@@ -291,7 +281,7 @@ flockApp.controller('userPageController', function ($scope, $window, userService
         } );
     };
 
-    $scope.reloadQuack = function(quackId, quackIndex, type) {
+    $scope.reloadQuack = function(quackId, quackIndex) {
         quackService.reloadQuack(quackId).then(function (data) {
             if (!(data.QuackImage) || data.QuackImage == "") {
                 data.showQuackImage = false;

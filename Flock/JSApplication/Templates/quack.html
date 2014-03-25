@@ -96,12 +96,10 @@
                         <img style="margin-left: 5px; margin-bottom: 5px;" class="media-object img-thumbnail littleprofileimage" ng-src="data:image/jpeg;base64,{{quack.LatestReply.UserImage}}" />
                     </a>
                     <div class="media-body">
-
                         <a class="media-heading userprofilename ng-binding" style="font-size: 12px;" href="" ng-click="openProfilePageByGivenName(quack.LatestReply.UserDisplayName)">{{quack.LatestReply.UserDisplayName}}</a>
-                        <span class="userprofiletime">&middot;{{quack.LatestReply.TimeSpan}}</span>
-                        <p style="font-family: arial; font-size: 11px; width: 500px">
-                            <span highlight-tags callback-fn="onLinkClick" ng-model="quack.LatestReply.Message"></span>
-
+                        <span highlight-tags callback-fn="onLinkClick" ng-model="quack.LatestReply.Message"></span>
+                        <p style="font-family: arial; font-size: 12px; width: 500px">
+                            <span class="userprofiletime">{{quack.LatestReply.TimeSpan}}</span>
                         </p>
 
                     </div>
@@ -125,7 +123,8 @@
 
             <!--REPLY BOX-- ng-show="quack.ShowConversation"-->
             <div class="replybox" ng-show="quack.ShowConversation">
-                <textarea id="{{'replyBox'+ quack.Id}}" class="pull-left" style="width: 88%; height: 40px; resize: none; border: 1px solid lightgrey; font-family: arial; font-size: 12px;" placeholder="Reply..." rows="2" maxlength="300" ng-disabled="disableReplyAction" on-enter="saveReply(quack, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)"> @{{quack.UserDisplayName}}:&nbsp;</textarea>
+                <!--<textarea id="{{'replyBox'+ quack.Id}}" class="pull-left" style="width: 88%; height: 40px; resize: none; border: 1px solid lightgrey; font-family: arial; font-size: 12px;" placeholder="Reply..." rows="2" maxlength="300" ng-disabled="disableReplyAction" on-enter="saveReply(quack, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)"> @{{quack.UserDisplayName}}:&nbsp;</textarea>-->
+                <textarea id="{{'replyBox'+quack.Id}}" class="pull-left" style="width: 88%; height: 40px; resize: none; border: 1px solid lightgrey; font-family: arial; font-size: 12px;" placeholder="Reply..." rows="2" maxlength="300" ng-disabled="disableReplyAction" on-enter="saveReply(quack, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)"></textarea>
                 <a class="btn btn-primary btn-sm pull-right" style="margin-top: 4px;" ng-click="saveReply(quack, 'replyBox'+ quack.Id, quack.IsNew, quack.ConversationId)">comment</a>
             </div>
 

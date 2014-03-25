@@ -103,6 +103,19 @@ namespace Flock.DataAccess.Repositories.Concrete
             base.Update(currentQuack);
         }
 
+        public IList<Quack> GetAllDeactivatedReplies(int quackId)
+        {
+            var quacks = _context.Quacks
+                .Include("QuackContent")
+                .Include("User")
+                .Include("QuackType");
+            //TODO: Paging
+            return quacks.Where(quack => quack.QuackTypeID == 2 && quack.ConversationID == quackId)
+                .OrderBy(quack => quack.CreatedDate)
+                .Take(200)
+                .ToList();
+        }
+
         public IList<Quack> GetAllReplies(int quackId)
         {
             var quacks = _context.Quacks
@@ -133,6 +146,7 @@ namespace Flock.DataAccess.Repositories.Concrete
         public IQueryable<Quack> GetQuacksByLastNameAndFirstName(string lastName, string firstName)
         {
             return from quack in _context.Quacks
+                   where quack.Active == true
                          join quackContent in _context.QuackContents
                          on quack.ID equals quackContent.ID
                          join user in _context.Users

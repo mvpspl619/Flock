@@ -20,6 +20,7 @@ namespace Flock.DataAccess.Repositories.Interfaces
         void ActivateQuack(int id);
         void UpdateQuack(int quackId);
         IList<Quack> GetAllReplies(int quackId);
+        IList<Quack> GetAllDeactivatedReplies(int quackId);
         IList<Quack> GetQuacksInfo(int conversationId);
         double GetQuackID(Quack quack);
         Quack GetQuackById(int id);

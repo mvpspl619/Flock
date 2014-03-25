@@ -300,15 +300,15 @@ namespace Flock.Facade.Concrete
                         commentInfo = "";
                         break;
                     case 2:
-                        commentInfo = quacks[0].User.FirstName + " also commented on this Quack...";
+                        commentInfo = quacks[0].User.FirstName + " also commented on this";
                         break;
                     case 3:
                         commentInfo = quacks[0].User.FirstName + " and " + quacks[1].User.FirstName +
-                                      " also commented on this Quack...";
+                                      " also commented on this";
                         break;
                     case 4:
                         commentInfo = quacks[0].User.FirstName + ", " + quacks[1].User.FirstName + " and " + quacks[2].User.FirstName +
-                                      " also commented on this Quack...";
+                                      " also commented on this";
                         break;
                     default:
                         for (var i = 0; i < quacks.Count(); i++)
@@ -323,7 +323,7 @@ namespace Flock.Facade.Concrete
                                     break;
                             }
                         }
-                        commentInfo = commentInfo + " and " + (quacks.Count() - 2) + " others also replied to this Quack...";
+                        commentInfo = commentInfo + " and " + (quacks.Count() - 2) + " others also replied to this";
                         break;
                 }
                 resultQuack.CommentsInfo = commentInfo;
@@ -378,11 +378,11 @@ namespace Flock.Facade.Concrete
             _quackLikeRepository.DeleteQuackLike(id);
             _quackRepository.DeleteQuack(id);
 
-            var conversations = _quackRepository.GetAllReplies(id);
-            foreach (var conversation in conversations)
-            {
-                _quackRepository.DeleteQuack(conversation.ID);
-            }
+            //var conversations = _quackRepository.GetAllReplies(id);
+            //foreach (var conversation in conversations)
+            //{
+            //    _quackRepository.DeleteQuack(conversation.ID);
+            //}
         }
 
         public void ActivateQuack(int id)

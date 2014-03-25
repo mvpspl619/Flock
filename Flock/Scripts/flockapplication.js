@@ -5,8 +5,8 @@ reader.onload = function (e) {
     image.onload = function () {
         console.log(this.width, this.height);
         if (this.width >= 800 && this.height >= 330) {
-            document.getElementById("uplodedPic").style.width = "880px";
-            document.getElementById("uplodedPic").style.height = ((this.height * 880) / this.width) + "px";
+            document.getElementById("uplodedPic").style.width = "725px";
+            document.getElementById("uplodedPic").style.height = ((this.height * 725) / this.width) + "px";
             document.getElementById("uplodedPic").style.position = "relative";
             console.log("true");
         }

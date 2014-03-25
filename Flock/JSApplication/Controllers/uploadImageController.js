@@ -63,7 +63,7 @@ flockApp.controller('uploadImageController', function ($scope, userService, quac
         var y = $("#output").val();
         y = y.replace(/[^\d]/g, '');
         userImage.y = y;
-        userImage.width = 880;
+        userImage.width = 725;
         console.log($("uplodedPic"));
         var element = document.getElementById('uplodedPic');
         var imgHeight = angular.element(element).css('height');
@@ -75,7 +75,7 @@ flockApp.controller('uploadImageController', function ($scope, userService, quac
             userService.uploadImage(userImage).then(function (data) {
                 $("#uplodedPic").attr("src", "data:image/jpeg;base64," + data.Message);
                 $scope.imageSource = "data:image/jpeg;base64," + data.Message;
-                $("#uplodedPic").attr("style", "style='width:880px; height:330px;'");
+                $("#uplodedPic").attr("style", "style='width:725px; height:281px;'");
                 $scope.showPreview = false;
                 $scope.showSave = true;
             });
